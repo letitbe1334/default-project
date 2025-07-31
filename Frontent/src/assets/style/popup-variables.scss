@@ -1,0 +1,67 @@
+// 결제라인 팝업 [S]
+.appr-line-pop-layer {
+  .linehandley {
+    float: left;
+    margin-left: -10px;
+    padding-top: 4px;
+    padding-right: 10px;
+    cursor: move !important;
+  }
+  .linehandlex {
+    float: left;
+    margin-left: -10px;
+    padding-top: 4px;
+    padding-right: 10px;
+    opacity: 0.5;
+  }
+  .list-group-item.linehandle,
+  .list-group-item.linehandle .linetext {
+    cursor: move !important;
+  }
+  .lineclose {
+    float: right;
+    padding-top: 4px;
+    font-size: 12px;
+    margin-right: -10px;
+    cursor: pointer !important;
+  }
+  .flip-list-move {
+    transition: transform 0.5s;
+  }
+  .no-move {
+    transition: transform 0s;
+  }
+  .ghost {
+    opacity: 0.3;
+    background: #c8ebfb;
+  }
+  .list-group {
+    min-height: 20px;
+    list-style: none;
+    padding-left: 0px;
+    margin: 0px;
+  }
+  .list-group[disabled]:not(.list-group-item.linehandle) {
+    cursor: auto;
+  }
+  .linespan1 {
+    min-width: 50px !important;
+    text-align: left;
+    font-weight: 600;
+  }
+  .linespan2 {
+    min-width: 120px !important;
+    text-align: left;
+  }
+  .linetext {
+    display: inline-block;
+  }
+  .list-group-item {
+    padding: 0.4rem 1.25rem !important;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    font-size: 0.8rem;
+  }
+}
+// 결제라인 팝업 [E]

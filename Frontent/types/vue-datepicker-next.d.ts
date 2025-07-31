@@ -1,0 +1,5 @@
+declare module 'vue-datepicker-next/locale/ko.es'
+declare module 'vue-datepicker-next/locale/en.es'
+declare module 'vue-datepicker-next/locale/ja.es'
+declare module 'vue-datepicker-next/locale/zh-cn.es'
+declare module 'vue-datepicker-next/locale/zh-tw.es'

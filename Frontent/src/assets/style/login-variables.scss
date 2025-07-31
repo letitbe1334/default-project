@@ -1,0 +1,271 @@
+.loginLayout {
+  background-color: $login-bg-color;
+  width: 100%;
+  height: 100vh;
+  .loginfrm {
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .text-wrap {
+      background-image: radial-gradient(ellipse farthest-corner at 0 140%, $login-main-color 0%, $login-main-color-second 70%, $login-main-color 70%);
+      color: #fff;
+      white-space: normal !important;
+      border-radius: 0 15px 15px 0;
+      width: 50%;
+    }
+    // 로그인 input/button 색상
+    .bg-login-main-color {
+      background-color: $login-main-color !important;
+    }
+    .text-login-main-color {
+      color: $login-main-color !important;
+    }
+    section {
+      display: block;
+    }
+    .justify-content-center {
+      -webkit-box-pack: center !important;
+      -ms-flex-pack: center !important;
+      justify-content: center !important;
+    }
+    .row {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+    }
+    .text-center {
+      text-align: center !important;
+    }
+    .mb-5,
+    .my-5 {
+      margin-bottom: 3rem !important;
+    }
+    .col-md-6 {
+      position: relative;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+    }
+    .wrap {
+      border-radius: 15px;
+      width: 100%;
+      -webkit-box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
+      -moz-box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
+      box-shadow: 27px 43px 43px -26px rgba(89, 89, 89, 0.39);
+    }
+    .align-items-center {
+      -webkit-box-align: center !important;
+      align-items: center !important;
+    }
+    .d-flex {
+      display: flex !important;
+    }
+    .w-100 {
+      width: 100% !important;
+    }
+    .text-wrap .text h2 {
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.5;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+      margin-top: 0;
+    }
+    p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      display: block;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+    }
+    .login-wrap {
+      position: relative;
+      background: #fff;
+      width: 50%;
+      border-radius: 15px 0 0 15px;
+      h3 {
+        font-weight: 300;
+        line-height: 1.5;
+        color: #000;
+        font-size: 1.75rem;
+        margin-top: 0;
+      }
+    }
+    .mb-4 {
+      margin-bottom: 1.5rem !important;
+    }
+    form {
+      display: block;
+      margin-top: 0em;
+    }
+    .form-group {
+      position: relative;
+    }
+    .mb-3 {
+      margin-bottom: 1rem !important;
+    }
+    .p-4 {
+      padding: 1.5rem !important;
+    }
+    .loginText {
+      .q-field__control {
+        border-radius: 20px;
+        background: #f2f2f2;
+      }
+      .q-field__prepend {
+        padding-right: 10px !important;
+      }
+      .q-field__control-container input.q-field__native {
+        margin-bottom: 0px !important;
+      }
+      .q-field--float {
+        .q-field__label {
+          transform: translateY(-70%) scale(0.75) !important;
+        }
+      }
+    }
+    .q-btn__content {
+      .q-icon {
+        font-size: 1.5rem;
+        margin-right: 10px;
+      }
+    }
+    .inline-btn {
+      display: inline-flex;
+    }
+  
+    .col-md-12 {
+      position: relative;
+      width: 100%;
+    }
+    .w-50 {
+      width: 50%;
+    }
+    .mb-0, .my-0 {
+      margin-bottom: 0 !important;
+    }
+  }
+  @media (min-width: 576px) {
+    .loginfrm .container {
+      max-width: 570px;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+  @media (min-width: 768px) {
+    .loginfrm .container {
+      max-width: 760px;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+  @media (min-width: 992px) {
+    .loginfrm.ftco-section {
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      width: 960px;
+      transform: translate(-50%, -40%);
+    }
+    .loginfrm .container {
+      max-width: 960px;
+    }
+    .loginfrm .col-lg-10 {
+      -webkit-box-flex: 0;
+      flex: 0 0 83.33333%;
+      max-width: 83.33333%;
+    }
+    .loginfrm .p-lg-5 {
+      padding: 3rem !important;
+    }
+    .loginfrm .col-md-6 {
+      -webkit-box-flex: 0;
+      -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+      max-width: 50%;
+    }
+    .loginfrm .col-md-12 {
+      -webkit-box-flex: 0;
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    .loginfrm .d-md-flex {
+      display: -webkit-box !important;
+      display: -ms-flexbox !important;
+      display: flex !important;
+    }
+    .loginfrm .order-md-last {
+      -webkit-box-ordinal-group: 14;
+      -ms-flex-order: 13;
+      order: 13;
+    }
+  }
+  @media (min-width: 1200px) {
+    .loginfrm.ftco-section {
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      width: 960px;
+      transform: translate(-50%, -40%);
+    }
+    .loginfrm .container {
+      max-width: 960px;
+      width: 100%;
+      padding-right: 15px;
+      padding-left: 15px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+  }
+  
+  @media (max-width: 991.98px) {
+    .loginfrm .text-wrap,
+    .loginfrm .login-wrap {
+      width: 100%;
+    }
+    .text-wrap {
+      border-radius: 15px 15px 0 0 !important;
+    }
+    .login-wrap {
+      border-radius: 0 0 15px 15px !important;
+    }
+  }
+  
+  .anivertilogo {
+    -webkit-animation: ratatelogo 1s ease-out;
+    -moz-animation: ratatelogo 1s ease-out;
+    animation: ratatelogo 1s ease-out;
+  }
+  @-webkit-keyframes ratatelogo {
+    50% {
+      transform: rotateY( 180deg );
+    }
+    100% {
+      transform: rotateY( 0deg );
+    }
+  }
+  @-moz-keyframes ratatelogo {
+    50% {
+      transform: rotateY( 180deg );
+    }
+    100% {
+      transform: rotateY( 0deg );
+    }
+  }
+  @keyframes ratatelogo {
+    50% {
+      transform: rotateY( 180deg );
+    }
+    100% {
+      transform: rotateY( 0deg );
+    }
+  }
+}

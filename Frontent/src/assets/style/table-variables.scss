@@ -1,0 +1,1683 @@
+// 컴포넌트 Border 스타일
+%ComponentTableInnerBorderStype {
+  border: 1px solid $c-component-tableinner-border-color;
+}
+.material-icons-td {
+  direction: ltr;
+  display: inline-block;
+  font-family: 'Material Icons';
+  font-size: 10px;
+  color: $default-blue;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  font-feature-settings: 'liga';
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
+.default-table.td-custom-top .edittd-custom {
+  vertical-align: top !important;
+}
+
+.table-border {
+  .default-table {
+    border-top: 2px solid $table-default-color;
+    padding: 0 10px;
+    box-shadow: 0;
+    border-radius: 8px !important;
+    margin-bottom: 10px;
+  }
+}
+
+.default-table {
+  .q-virtual-scroll__padding {
+    td {
+      border-bottom: 0px;
+    }
+  }
+
+  .custom-card {
+    border-top-width: 0px;
+    border-radius: 0px !important;
+    margin-bottom: 0px;
+  }
+  // 페이징 색상
+  .bg-table-paging-color {
+    color: $table-paging-color !important;
+    font-weight: 800;
+    outline: 0 !important;
+  }
+  .text-table-paging-color {
+    color: #444444 !important;
+  }
+
+  td {
+    vertical-align: top;
+  }
+
+  .td-input-column {
+    width: 100%;
+    height: 100%;
+  }
+
+  .td-input-column > div {
+    width: 100%;
+    height: 100%;
+  }
+
+  .edittd-text {
+    padding: 0px !important;
+  }
+
+  .edittd-number {
+    padding: 0px !important;
+  }
+
+  .edittd-textarea {
+    padding: 0px !important;
+  }
+
+  .edittd-date {
+    vertical-align: top;
+  }
+  .edittd-datetime {
+    padding-top: 4px !important;
+  }
+
+  .edittd-undefined,
+  .edittd-link,
+  .edittd-html,
+  .edittd-circle,
+  .edittd-cost,
+  .edittd-proxy,
+  .edittd-user,
+  .edittd-date,
+  .edittd-color,
+  .edittd-tag,
+  .edittd-custom,
+  .edittd-null {
+    vertical-align: middle !important;
+    .q-btn {
+      padding: 2px 6px;
+    }
+  }
+
+  .edittd-custom,
+  .edittd-tag > .q-chip {
+    padding: 2px 5px;
+    margin: 0 2px;
+    .q-chip__content.row {
+      display: block !important;
+      font-size: 12px;
+    }
+  }
+  .edittd-custom {
+    .q-chip {
+      height: 24px;
+    }
+  }
+
+  .edittd-date > span:not(.non-edit)::after {
+    @extend .material-icons-td;
+    content: 'edit_calendar';
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+  }
+
+  .edittd-select > span:not(.non-edit)::after {
+    @extend .material-icons-td;
+    content: 'beenhere';
+    position: absolute;
+    right: 2px;
+    bottom: 2px;
+  }
+
+  .tabletopicon {
+    font-size: 0.6rem;
+  }
+
+  .tablefullscreen {
+    width: 20px;
+    margin-left: 4px;
+  }
+
+  .q-table__top {
+    .q-table__title {
+      font-size: 1.05em !important;
+      font-weight: 600;
+    }
+  }
+
+  .table-chip-div {
+    padding-left: 5px;
+  }
+  .table-chip-div > .q-chip {
+    margin-right: 5px !important;
+  }
+
+  .internal-action-checklist-header-input > .q-chip {
+    margin-left: 5px !important;
+  }
+
+  thead {
+    position: sticky !important;
+    top: 0;
+    z-index: 2;
+  }
+
+  .table-header-true {
+    padding-top: 3px !important;
+  }
+
+  thead tr th {
+    background: $tableheader-backcolor;
+    color: $tableheader-color;
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 0 !important;
+    z-index: 1;
+    position: relative;
+    text-align: center !important;
+    min-height: 36px !important;
+    height: 36px !important;
+    .tableDatepicker {
+      // 헤더 날짜
+      margin: 4px;
+      .inputClass {
+        background-color: transparent;
+      }
+    }
+    .tableHeaderText {
+      margin: 4px;
+      .q-field__inner {
+        padding-bottom: 0px !important;
+      }
+      .q-field__native {
+        padding-bottom: 0px !important;
+        padding-left: 10px;
+        padding-right: 25px;
+        min-height: 28px !important;
+        cursor: pointer !important;
+        font-size: 0.95em !important;
+        margin-top: 22px;
+        padding-top: 0px;
+        border-radius: 3px;
+        @extend %ComponentTableInnerBorderStype;
+        margin-bottom: 1px;
+      }
+    }
+  }
+
+  thead tr[name='resize-tr'] th {
+    padding: 0px !important;
+  }
+
+  tr:last-of-type {
+    td {
+      border-bottom-width: 1px !important;
+    }
+  }
+
+  thead tr:nth-last-child(2) th {
+    border-bottom: 1px solid $table-border-color !important;
+  }
+
+  thead tr:first-child th {
+    border-top: 1px solid $table-default-innertop-color;
+    top: 0;
+  }
+
+  tbody tr:not(.description-tr):not(.no-hover-row):hover {
+    background-color: $table-even-color;
+  }
+
+  tbody .description-td:before {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  tbody .no-hover-row > td:before {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  .table-tr-highLight > td {
+    border-top-width: 3px !important;
+    border-top-style: dashed !important;
+    border-top-color: hsla(0, 95%, 35%, 1) !important;
+    border-bottom-width: 3px !important;
+    border-bottom-style: dashed !important;
+    border-bottom-color: hsla(0, 95%, 35%, 1) !important;
+  }
+
+  .table-tr-highLight > td:first-child {
+    border-left-width: 3px !important;
+    border-left-style: dashed !important;
+    border-left-color: hsla(0, 95%, 35%, 1) !important;
+  }
+
+  .table-tr-highLight > td:last-child {
+    border-right-width: 3px !important;
+    border-right-style: dashed !important;
+    border-right-color: hsla(0, 95%, 35%, 1) !important;
+  }
+
+  .table-tr-highLight:first-child > td {
+    border-top-width: 3px !important;
+    border-top-style: dashed !important;
+    border-top-color: hsla(0, 95%, 35%, 1) !important;
+  }
+
+  .table-tr-highLight:last-child > td {
+    border-bottom-width: 3px !important;
+    border-bottom-style: dashed !important;
+    border-bottom-color: hsla(0, 95%, 35%, 1) !important;
+  }
+
+  tbody {
+    tr:first-child {
+      td {
+        border-top-width: 0px !important;
+      }
+    }
+
+    td {
+      font-size: 0.8rem;
+      color: $tablebody-color;
+      padding: 0px 4px !important;
+
+      button.q-hoverable:hover > .q-focus-helper {
+        background: #fff;
+      }
+    }
+
+    tr {
+      height: 30px !important;
+      min-height: 30px !important;
+    }
+  }
+
+  .tableCheckBox {
+    .q-checkbox__inner {
+      width: 0.9rem !important;
+      min-width: 0.9rem !important;
+      height: 0.9rem !important;
+    }
+  }
+
+  /**
+  td > input 설정
+  */
+  .q-field__control {
+    height: 28px;
+
+    input {
+      margin: 0 !important;
+    }
+
+    textarea {
+      margin: 0 !important;
+      padding: 0 !important;
+      min-height: 28px;
+      max-height: 95px;
+    }
+  }
+
+  .q-textarea .q-field__control {
+    min-height: 28px !important;
+    height: auto;
+    max-height: 100px;
+  }
+
+  // 테이블 내 Component
+  // 테이블 내 사용자검색
+  .table-inner-td-user {
+    .q-field__native {
+      font-size: 0.9em;
+    }
+    .q-field__append {
+      height: 28px;
+      padding-left: 2px !important;
+      .q-icon {
+        font-size: 14px !important;
+        cursor: pointer;
+      }
+      .q-icon:last-child {
+        padding-right: 3px;
+      }
+    }
+  }
+  .table-inner-td-user.q-field--disabled .q-field__control-container .q-field__native {
+    background: transparent !important;
+  }
+  .table-inner-tr-user {
+    margin: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.24);
+    border-radius: 3px;
+    .q-field__control {
+      height: 26px;
+    }
+    .q-field__native {
+      font-size: 0.9em;
+      padding-left: 5px;
+    }
+    .q-field__append {
+      height: 28px;
+      margin-right: 5px;
+      padding-left: 2px !important;
+      .q-icon {
+        font-size: 14px !important;
+        cursor: pointer;
+      }
+      .q-icon:last-child {
+        padding-right: 3px;
+      }
+    }
+  }
+  // 테이블 inner 첨부파일
+  .preview-image-card {
+    min-width: 800px;
+    .q-carousel {
+      height: 750px !important;
+    }
+    .preview-close-btn {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      z-index: 99;
+    }
+  }
+  .tableUploadColumn {
+    .table-upload {
+      width: auto;
+    }
+    .q-uploader__header {
+      min-height: 30px;
+      line-height: 30px;
+    }
+    .uploaded-file-list-table {
+      .q-item {
+        min-height: 24px;
+        padding: 3px;
+      }
+    }
+    .q-item__section--side {
+      padding-left: 4px;
+    }
+    .thumnailUpload {
+      width: 28px !important;
+      height: 28px !important;
+    }
+    .q-uploader__list {
+      display: none;
+    }
+    > .q-uploader--disable {
+      display: none;
+    }
+    .uploaded-file-list {
+      border-width: 0px !important;
+    }
+
+    .q-uploader--disable {
+      max-height: 36px !important;
+      min-height: 20px !important;
+    }
+
+    .empty_dscription {
+      font-size: 14px;
+      color: #909399;
+      margin-bottom: 0 !important;
+    }
+
+    .table-file-origin-name {
+      line-height: 1.5em !important;
+      width: 100% !important;
+      text-align: left !important;
+      padding-left: 3px;
+      .table-ellipsis {
+        width: 160px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+      }
+    }
+
+    .file-description {
+      .q-field--with-bottom {
+        padding-bottom: 0px !important;
+      }
+      .q-field--dense .q-field__inner {
+        padding-bottom: 0px !important;
+      }
+    }
+  }
+
+  .q-uploader--bordered {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.1) !important;
+    border-radius: 5px !important;
+    background-color: transparent !important;
+    .q-uploader__header {
+      background-color: rgba(0, 0, 0, 0.04) !important;
+      color: #616161 !important;
+      .q-btn {
+        margin-top: 2px !important;
+        margin-right: 6px !important;
+      }
+    }
+  }
+  .tableCheckBox-true.disabled {
+    opacity: 0.55 !important;
+  }
+  .tableCheckBox-false.disabled {
+    opacity: 0.35 !important;
+  }
+  // 테이블 내 부서선택
+  .customDept.q-field--with-bottom {
+  }
+  .customDept {
+    padding-top: 3px;
+    .q-field__native {
+      min-height: 28px !important;
+    }
+    .q-field__bottom {
+      display: none;
+    }
+    .q-field__append.q-field__marginal {
+      height: 28px;
+      line-height: 28px;
+    }
+    .q-field__control > .q-field__append > .q-icon {
+      margin-top: 0px !important;
+    }
+  }
+  // 테이블내 멀티 셀랙트
+  .customMultiSelect {
+    .q-field__control {
+      height: auto !important;
+    }
+  }
+  // 테이블 내 멀티 부서
+  .customDeptMulti {
+    .q-field__control-container {
+      padding-top: 3px !important;
+    }
+    .q-field__control {
+      min-height: 28px;
+      height: auto !important;
+    }
+    .q-field__native {
+      min-height: 28px !important;
+      line-height: 28px !important;
+      @extend %ComponentTableInnerBorderStype;
+    }
+    .q-field__append.q-field__marginal {
+      height: 28px;
+      .q-icon {
+        margin-top: 0px;
+      }
+    }
+  }
+  .q-field--with-bottom {
+    padding-bottom: 0px !important;
+  }
+  // 테이블 내 멀티 User
+  .customUserField {
+    .q-field__control-container {
+      padding-top: 4px;
+    }
+    .q-field__append.q-field__marginal {
+      height: 20px;
+      top: 6px;
+    }
+    .q-field__bottom {
+      display: none;
+    }
+    .q-field__control,
+    .q-field__native {
+      min-height: 26px !important;
+      height: auto;
+    }
+    .q-chip {
+      margin: 2px;
+    }
+  }
+  .customRadio {
+    .q-field__control {
+      min-height: 28px;
+    }
+    .q-field__control-container {
+      padding-top: 3px;
+    }
+    .q-field__native {
+      min-height: 28px !important;
+      margin-top: 0px;
+      padding-bottom: 2px !important;
+      background: transparent !important;
+      .CoptionGroupRadio {
+        margin-bottom: 0px;
+      }
+    }
+  }
+  // 테이블 내 Text Btn
+  .customText-btn {
+    position: relative;
+    .q-field__native {
+      min-height: 28px !important;
+    }
+    .textOtherIcon {
+      padding: 2px;
+    }
+    .q-field__after.q-field__marginal {
+      position: absolute;
+      right: 3px;
+      top: 0px;
+      height: 28px;
+    }
+    .q-field__bottom {
+      display: none;
+    }
+  }
+  .customText {
+    .q-field__append.q-field__marginal {
+      height: 28px;
+    }
+    .q-field__bottom {
+      display: none;
+    }
+    .q-field__native {
+      height: 28px !important;
+      min-height: 28px !important;
+    }
+  }
+  // 테이블 내 CField
+  .customTag {
+    margin-top: 3px;
+    min-height: 28px !important;
+    height: auto !important;
+    .q-field__control {
+      padding-top: 0px;
+      height: auto !important;
+      min-height: 28px !important;
+    }
+    .q-field__native {
+      margin-top: 0px;
+      padding-bottom: 0px !important;
+      padding-left: 10px;
+      border-radius: 3px;
+      @extend %ComponentTableInnerBorderStype;
+      min-height: 28px !important;
+      height: 100%;
+      .q-chip {
+        margin-top: 2px;
+        margin-bottom: 2px;
+      }
+    }
+    .material-icons {
+      font-size: 0.8rem;
+    }
+    .q-field__before {
+      display: none;
+    }
+    .q-field__marginal {
+      height: 18px;
+    }
+    .q-field__control-container {
+      padding-top: 0px;
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
+    .q-field__append {
+      padding-left: 0px;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+    }
+    .q-field__bottom {
+      display: none;
+    }
+  }
+  // 테이블 내 Task
+  .customTaskTarget {
+    height: 26px !important;
+    .q-field__control {
+      padding-top: 0px;
+      min-height: 26px !important;
+    }
+    .q-field__native {
+      margin-top: 0px;
+      padding-bottom: 0px !important;
+      padding-left: 10px;
+      border-radius: 3px;
+      @extend %ComponentTableInnerBorderStype;
+      min-height: 26px !important;
+      height: 100%;
+    }
+    .material-icons {
+      font-size: 0.8rem;
+    }
+    .q-field__before {
+      display: none;
+    }
+    .q-field__marginal {
+      height: 18px;
+    }
+    .q-field__control-container {
+      padding-top: 0px;
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
+    .q-field__append {
+      padding-left: 0px;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+    }
+    .q-field__bottom {
+      display: none;
+    }
+  }
+  .customMultiTableSelect {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    height: auto;
+    min-height: 28px !important;
+    .q-field__control {
+      height: auto !important;
+      min-height: 28px !important;
+    }
+    .q-field__control-container {
+      padding-top: 1px !important;
+      height: auto !important;
+      min-height: 28px !important;
+    }
+    .q-field__bottom {
+      display: none;
+    }
+    .q-field__native {
+      margin-top: -2px;
+      padding-bottom: 0px !important;
+      padding-left: 10px;
+      padding-right: 13px;
+      border-radius: 3px;
+      @extend %ComponentTableInnerBorderStype;
+      min-height: 28px !important;
+      height: auto;
+      font-size: 0.95em;
+      padding-bottom: 6px;
+    }
+    .q-select__dropdown-icon {
+      margin-right: -8px;
+      margin-top: 0px;
+    }
+    .q-field__marginal {
+      height: 28px;
+    }
+    .q-field__append {
+      padding-top: 0px;
+      position: absolute;
+      right: 6px;
+      top: 0px;
+      .q-field__focusable-action {
+        font-size: 0.85em;
+      }
+    }
+    .q-field__control-container {
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
+    .q-field__control {
+      min-height: 29px;
+    }
+    .q-chip {
+      margin-top: 1px !important;
+      margin-right: 2px !important;
+      font-size: 0.9em;
+    }
+  }
+  // 테이블 내 DatePicker
+  .tableDatepicker {
+    padding-bottom: 0px !important;
+    .customdatelabel {
+      margin-top: 0px !important;
+    }
+    .cdatetimepic .mx-input-wrapper {
+      padding: 0px 3px;
+      margin-bottom: 0px !important;
+      .inputClass {
+        padding: 0px 3px !important;
+        border-radius: 3px 3px 0 0;
+        height: 28px;
+        border: 1px solid rgba(0, 0, 0, 0.15) !important;
+      }
+      .inputClass:disabled {
+        padding: 0px 3px !important;
+        border: 1px solid rgba(0, 0, 0, 0.24) !important;
+        background: $c-disable-background-bg-color !important;
+      }
+    }
+  }
+}
+
+.q-table--dense {
+  .q-table__sort-icon {
+    position: absolute;
+    top: 6px;
+    right: 1px;
+  }
+
+  .q-table__top {
+    padding: 5px 0px 3px 5px;
+    background-color: $tabletop-color !important;
+    color: $tabletop-title-color !important;
+
+    i.pe-7s-angle-right-circle {
+      font-weight: 600;
+      color: $table-default-color;
+    }
+  }
+
+  .checkbox-th-fix {
+    position: sticky;
+    z-index: 3;
+    left: 0px;
+    background-color: #eef2fd;
+  }
+
+  .checkbox-td {
+    position: sticky;
+    z-index: 1;
+    left: 0px;
+    background-color: #f5f5f5;
+  }
+}
+
+.q-tr {
+  th:first-child {
+    border-left: $table-border !important;
+  }
+
+  th:last-child {
+    border-right: $table-border !important;
+  }
+}
+
+.q-tr {
+  td:first-child {
+    border-left: $table-border !important;
+  }
+
+  td:last-child {
+    border-right: $table-border !important;
+  }
+}
+
+.filtering-text {
+  .q-field__control {
+    height: 30px !important;
+  }
+}
+
+.q-pagination {
+  padding-left: 15px;
+  flex: none;
+
+  .row {
+    flex: none;
+  }
+}
+
+.table-setting {
+  display: inline;
+
+  .pe-7s-config {
+    vertical-align: bottom;
+  }
+}
+
+.gridbtntop {
+  margin-top: 1px !important;
+  margin-bottom: 0px !important;
+
+  button {
+    margin-right: 2px;
+  }
+
+  button:last-child {
+    margin-right: 0px;
+  }
+}
+
+.gridsettingIcon {
+  i {
+    font-size: 1.1rem;
+    vertical-align: top !important;
+  }
+
+  border-width: 0px !important;
+}
+.gridsettingIcon {
+  button {
+    width: 12px;
+  }
+}
+.gridSearchIcon2 {
+  height: 26px;
+  margin-left: 0px;
+  .q-field {
+    font-size: 12px !important;
+  }
+  .q-placeholder::placeholder {
+    font-size: 13px !important;
+  }
+  .q-field--dense {
+    .q-field__marginal {
+      height: 22px;
+    }
+  }
+  .q-field__inner {
+    padding: 0px !important;
+  }
+
+  .q-field--standard {
+    height: 26px;
+  }
+
+  input.q-field__native {
+    height: 26px;
+    color: $tabletop-title-color !important;
+  }
+
+  .q-field__control {
+    height: 26px !important;
+
+    .q-icon {
+      color: $tabletop-title-color !important;
+      font-size: 0.8em !important;
+      padding-top: 0.5em;
+    }
+  }
+
+  .q-field__control-container {
+    height: 26px;
+  }
+}
+
+.gridSearchIcon {
+  height: 26px;
+  margin-left: 20px;
+
+  .q-field {
+    font-size: 12px !important;
+  }
+
+  .q-placeholder::placeholder {
+    font-size: 13px !important;
+  }
+
+  .q-field--dense {
+    .q-field__marginal {
+      height: 22px;
+    }
+  }
+
+  .q-field__inner {
+    padding: 0px !important;
+    .q-field__control {
+      border-bottom: 1px solid #bdbdbd;
+    }
+  }
+
+  .q-field--standard {
+    height: 26px;
+  }
+
+  input.q-field__native {
+    height: 26px;
+    color: $tabletop-title-color !important;
+  }
+
+  .q-field__control {
+    height: 26px !important;
+
+    .q-icon {
+      color: $tabletop-title-color !important;
+      font-size: 0.8em !important;
+      padding-top: 0.5em;
+    }
+  }
+
+  .q-field__control-container {
+    height: 26px;
+  }
+}
+
+.tableinnerBtn {
+  text-transform: none !important;
+  font-size: inherit;
+  height: inherit !important;
+
+  .q-btn__wrapper {
+    padding-top: 0px !important;
+  }
+
+  width: 100%;
+  height: auto !important;
+
+  .q-btn__wrapper {
+    padding: 0 !important;
+    min-height: 24px !important;
+    height: 24px !important;
+
+    .q-btn__content {
+      padding: 0 !important;
+    }
+  }
+}
+
+.tableinnerUserSearch {
+  .material-icons {
+    margin-right: 0px !important;
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+    font-size: 14px;
+  }
+}
+
+.tableinnerUserSearch-left {
+  .q-btn__content {
+    text-align: left !important;
+  }
+}
+
+.tableinnerUserSearch-right {
+  .q-btn__content {
+    text-align: right !important;
+  }
+}
+
+.tableinnerBtn-left {
+  .q-btn__content {
+    text-align: left !important;
+  }
+}
+
+.tableinnerBtn-right {
+  .q-btn__content {
+    text-align: right !important;
+  }
+}
+.tableinnerBtn-ellipsis > .q-btn__wrapper > .q-btn__content > .block {
+  max-height: 20px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+  text-overflow: ellipsis;
+}
+.tableinnerBtn-ellipsis > span {
+  max-height: 20px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+  text-overflow: ellipsis;
+}
+
+.tableInnerIsExpend {
+  height: inherit !important;
+
+  .q-btn__wrapper {
+    padding-top: 0px !important;
+  }
+
+  width: 16px;
+  height: 16px !important;
+
+  .q-btn__wrapper {
+    padding: 0 !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    height: 16px !important;
+    max-width: 16px !important;
+
+    .q-btn__content {
+      padding: 0 !important;
+    }
+  }
+
+  i {
+    font-size: 10px !important;
+  }
+}
+
+.tablePagingBtn {
+  .q-btn__wrapper {
+    min-height: 24px !important;
+  }
+
+  .q-btn__content {
+    padding: 0px !important;
+    width: 24px;
+  }
+}
+
+.tablePagingInput {
+  input {
+    padding: 0px !important;
+    text-align: center;
+  }
+
+  .q-field__inner {
+    padding-bottom: 0px !important;
+    padding-top: 0px !important;
+  }
+
+  .q-field--outlined .q-field__control {
+    padding: 0 25px 0 5px;
+  }
+
+  .q-field__native span {
+    margin-bottom: 0px !important;
+    padding-left: 0px !important;
+  }
+
+  // .q-field--auto-height.q-field--dense .q-field__control, .q-field--auto-height.q-field--dense .q-field__native {
+  .q-field__control {
+    min-height: 28px !important;
+    max-height: 28px !important;
+  }
+
+  .q-field__append {
+    margin-left: 17px !important;
+    height: 28px !important;
+  }
+
+  .q-field__native {
+    line-height: 2px !important;
+    min-height: 28px !important;
+    max-height: 28px !important;
+  }
+  .q-uploader--bordered {
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: 1px dashed rgba(0, 0, 0, 0.2) !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+
+    .q-uploader__header {
+      background-color: transparent !important;
+      color: #616161 !important;
+    }
+  }
+}
+
+.configColumnSet {
+  padding: 5px 0;
+  min-width: 150px;
+
+  .q-item {
+    padding: 2px 8px;
+  }
+
+  .q-item__section {
+    height: 30px;
+    padding-right: 0px;
+    font-size: 0.9em;
+  }
+
+  .q-checkbox__inner {
+    height: 30px !important;
+    width: 30px !important;
+    min-width: 30px !important;
+  }
+}
+
+.q-checkbox__bg {
+  border-width: 1px !important;
+}
+
+.q-table--no-wrap td {
+  white-space: normal;
+}
+
+.ColumInnerBtnGroup {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  .q-icon {
+    height: 13px !important;
+    width: 13px !important;
+    min-height: 13px !important;
+    min-width: 13px !important;
+    padding: 0px !important;
+    font-size: 0.85em !important;
+    border-radius: 2px;
+  }
+  .imp-inner-btn-req {
+    background: #f44336;
+    color: #fff !important;
+  }
+  .imp-inner-btn-immi {
+    background: #03a9f4;
+    color: #fff !important;
+  }
+}
+
+button.ColumInnerBtn {
+  height: 13px !important;
+  width: 13px !important;
+  min-height: 13px !important;
+  min-width: 13px !important;
+  padding: 0px !important;
+
+  .material-icons {
+    font-size: 7px !important;
+  }
+
+  .q-btn__wrapper {
+    height: 13px !important;
+    width: 13px !important;
+    min-height: 13px !important;
+    min-width: 13px !important;
+    padding: 0px !important;
+  }
+
+  .q-btn__content {
+    height: 13px !important;
+    width: 13px !important;
+    min-height: 13px !important;
+    min-width: 13px !important;
+    padding: 0px !important;
+  }
+}
+
+.description-td {
+  font-size: 0.85em;
+  // font-style: italic;
+  white-space: normal;
+  color: #5fa2e5;
+  margin-top: 4px;
+}
+
+.tableBuildIcon {
+  margin-top: -3px;
+}
+.tableExcelIcon {
+  width: 15px;
+  margin-left: 5px;
+  background-color: #fff;
+  background-image: url('../images/exceldown.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 15px 15px;
+  border-width: 0px;
+}
+
+.q-popup-edit {
+  padding: 3px 10px !important;
+
+  & .q-field {
+    padding-bottom: 0px !important;
+  }
+
+  & .q-field__inner .q-field__bottom {
+    display: none;
+  }
+
+  & .q-field__control-container textarea.q-field__native {
+    margin-top: 0px !important;
+  }
+
+  & .q-popup-edit__buttons {
+    & .q-btn__wrapper {
+      padding: 0px !important;
+      min-height: 26px !important;
+
+      & .q-btn__content {
+        padding: 0px 5px !important;
+      }
+    }
+
+    & > .q-btn {
+      border-radius: 6px;
+
+      & .q-btn__content .block {
+        font-size: 12px;
+        color: white;
+      }
+    }
+
+    & > .q-btn:first-child {
+      background: $default-red;
+    }
+
+    & > .q-btn:last-child {
+      background: $default-blue;
+    }
+  }
+}
+
+.gridNodataDiv {
+  bottom: 5px;
+}
+
+.tableDatepicker > .customDate {
+  padding-bottom: 0px !important;
+}
+
+.tableHeaderMultiUser {
+  height: 35px !important;
+}
+.table-td-text {
+  margin: 4px !important;
+  .q-field__control-container {
+    padding: 0px !important;
+  }
+  .q-field__control textarea {
+    line-height: 26px !important;
+  }
+  .q-field__native {
+    padding-bottom: 0px !important;
+    min-height: 28px !important;
+    font-size: 0.95em !important;
+    padding-top: 0px;
+    border-radius: 3px;
+    @extend %ComponentTableInnerBorderStype;
+  }
+  .q-field__control {
+    padding: 0px;
+  }
+}
+
+.table-td-textlabel {
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  border-radius: 5px;
+  line-height: 26px !important;
+  padding: 0px 3px;
+  min-height: 28px;
+  font-size: 14px;
+}
+
+.pad-txt-label {
+  padding: 3px 4px;
+}
+
+.table-td-numberlabel {
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  border-radius: 5px;
+  line-height: 26px !important;
+  padding: 0px 3px;
+  min-height: 28px;
+  font-size: 14px;
+}
+
+.q-tr td .tableDatepicker .customDate .q-field__control-container {
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  border-radius: 5px;
+  min-height: 28px !important;
+}
+
+.q-tr td .tableDatepicker .customDate .q-field__append {
+  padding-left: 0px !important;
+}
+
+.edittd-date::before {
+  vertical-align: top;
+}
+
+.q-tr td .tableDatepicker .customDate .dateCloseIcon {
+  position: absolute;
+  right: 0px;
+  top: 8px;
+}
+
+.table-td-text.q-field--highlighted .q-field__control:hover::before {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+.table-td-text .q-field__control:hover::before {
+  border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+.table-td-text.q-field--disabled .q-field__control {
+  pointer-events: auto !important;
+}
+
+.edittd-select .q-select.q-field--disabled {
+  padding-bottom: 0px !important;
+}
+
+.q-table .custom-file-column.q-list--bordered {
+  border: 0px !important;
+}
+
+.table-bottom-fixed {
+  background-color: #eef2fd;
+  position: sticky;
+  bottom: 0;
+}
+
+.main-dashboard-table {
+  border-width: 0px !important;
+  box-shadow: 0 0 0 0 !important;
+  padding: 0px !important;
+  .q-table__top {
+    display: none;
+  }
+  .q-table__middle {
+    border-radius: 0px !important;
+  }
+}
+
+.isDashboardTable {
+  border-width: 0px !important;
+  box-shadow: 0 0 0 0 !important;
+  .q-table tr {
+    border: 0px !important;
+  }
+  thead tr:first-child th {
+    border: 0px !important;
+  }
+  tbody {
+    border: 0px !important;
+  }
+  tbody td {
+    border: 0px !important;
+  }
+  .q-tr td:first-child {
+    border: 0px !important;
+  }
+  .q-tr td:last-child {
+    border: 0px !important;
+  }
+  thead tr th {
+    background: #f8f8f8;
+    border-bottom: 1px solid #e8e8e8 !important;
+  }
+}
+.cardselectarea {
+  display: inline-flex;
+  float: left !important;
+  padding-right: 5px !important;
+  .customSelect {
+    padding: 0px !important;
+  }
+  .q-field__inner {
+    padding: 0px !important;
+  }
+  .customSelect.q-field--dense .q-field__control,
+  .customSelect.q-field--dense .q-field__marginal {
+    height: 38px !important;
+    min-height: 38px !important;
+  }
+  .q-field__control-container {
+    width: 100px !important;
+  }
+}
+
+.default-table-no-padding {
+  padding: 0px;
+  .q-table__top {
+    padding: 0px !important;
+  }
+}
+
+.fold-table {
+  .q-table__middle {
+    display: none;
+  }
+  .q-table__bottom {
+    display: none;
+  }
+}
+
+.air-no-check-target {
+  display: none;
+}
+
+// 근골격계 증상 설문
+.table-inner-custom {
+  .q-td {
+    padding: 10px !important;
+    .customRadio {
+      margin-top: 0px;
+      margin-bottom: 0px;
+      height: auto !important;
+      min-height: initial !important;
+      .q-field__control:after {
+        height: 0px;
+      }
+      .q-field__control {
+        height: auto !important;
+        min-height: initial !important;
+      }
+      .q-field__bottom {
+        display: none;
+      }
+      .q-field__control-container {
+        padding-top: 0px;
+      }
+      .q-field__label {
+        height: auto;
+      }
+      .q-field__label.ellipsis {
+        text-overflow: unset;
+        white-space: break-spaces;
+        overflow: visible;
+        font-size: 1.3em;
+      }
+      .q-field__native {
+        height: auto !important;
+        min-height: initial !important;
+        background-color: transparent !important;
+        padding-bottom: 10px !important;
+      }
+    }
+  }
+  .th-td-style {
+    vertical-align: middle !important;
+    padding: 5px 5px !important;
+  }
+  .q-field__control {
+    height: 33px;
+  }
+  .customText {
+    .q-field__append.q-field__marginal {
+      height: 28px;
+    }
+    .q-field__bottom {
+      display: none;
+    }
+  }
+  .customText .q-field__control > .q-field__append > .q-icon {
+    margin-top: 0px;
+  }
+  .customRadio {
+    .q-field__control-container {
+      padding: 0px;
+    }
+    .q-field__control {
+      min-height: 33px;
+    }
+    .q-field__native {
+      border-width: 0px;
+    }
+  }
+  .customText.before-text {
+    margin: 5px;
+  }
+  .customCheck {
+    margin-top: 10px;
+    margin-bottom: 25px;
+    .q-field__control:after {
+      height: 0px;
+    }
+    .q-field__bottom {
+      display: none;
+    }
+    .q-field__control-container {
+      padding-top: 36px;
+    }
+    .q-field__label {
+      height: auto;
+    }
+    .q-field__label.ellipsis {
+      text-overflow: unset;
+      white-space: break-spaces;
+      overflow: visible;
+      font-size: 1.3em;
+    }
+    .q-field__native {
+      height: auto;
+      min-height: 40px !important;
+      margin-top: 0px;
+      padding-bottom: 0px !important;
+      border-width: 0px;
+    }
+  }
+  .customRadio {
+    margin-top: 0px;
+    margin-bottom: 10px;
+    .q-field__control:after {
+      height: 0px;
+    }
+    .q-field__bottom {
+      display: none;
+    }
+    .q-field__control-container {
+      padding-top: 10px;
+    }
+    .q-field__label {
+      height: auto;
+    }
+    .q-field__label.ellipsis {
+      text-overflow: unset;
+      white-space: nowrap;
+      overflow: visible;
+      font-size: 1.3em;
+    }
+    .q-field__native {
+      height: auto;
+      min-height: 40px !important;
+      margin-top: 0px;
+      padding-bottom: 0px !important;
+    }
+  }
+}
+// 위험물 취급일지
+.blinking {
+  -webkit-animation: blink 1s ease-in-out infinite alternate;
+  -moz-animation: blink 1s ease-in-out infinite alternate;
+  animation: blink 1s ease-in-out infinite alternate;
+}
+@-webkit-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.quansumcls {
+  width: 40px;
+  height: 20px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-block;
+  margin-left: 10px;
+}
+.quansumOver {
+  background-color: red;
+}
+.quansumDown {
+  background-color: gray;
+}
+.quansumEqual {
+  background-color: blue;
+}
+.container-area {
+  display: flex;
+  align-items: center;
+}
+.header-area {
+  width: 110px;
+  flex-shrink: 0;
+  color: #0072c6 !important;
+  font-weight: 600;
+}
+.value-area {
+  flex-shrink: 1;
+  flex-grow: 1;
+  text-align: left;
+}
+// 뇌심혈관계 조사
+.brain-cardiovascular-survey {
+  .th-td-style {
+    vertical-align: middle !important;
+  }
+  .th-style {
+    font-weight: 700;
+    width: 100%;
+    line-height: 32px !important;
+  }
+  .td-style {
+    width: 16.6%;
+    .table-td-textlabel,
+    .table-td-numberlabel {
+      margin: 4px 0 !important;
+    }
+  }
+  .etc-info {
+    float: right;
+    font-size: 12.8px !important;
+    margin-right: 20px !important;
+  }
+  .q-field__control {
+    height: auto !important;
+    margin: 3px 3px 6px 3px !important;
+    .q-field__native {
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      .CoptionGroupRadio {
+        padding: 5px 0 !important;
+      }
+    }
+  }
+}
+.hideBorder {
+  .q-table--bordered {
+    border: none !important;
+  }
+}
+.pr-5 {
+  padding-right: 5px;
+}

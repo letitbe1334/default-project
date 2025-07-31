@@ -1,0 +1,1579 @@
+// 작업허가서 상세 [S]
+.work-card {
+  .customDate,
+  .customText {
+    padding-bottom: 0px !important;
+  }
+  label {
+    padding-bottom: 0px !important;
+  }
+}
+.work-title-text {
+  font-size: 15px;
+  font-weight: 800;
+}
+.bg-highLight {
+  border-width: 3px !important;
+  border-style: dashed !important;
+  border-color: hsla(0, 95%, 35%, 1) !important;
+}
+.work-permit-table {
+  .default-table {
+    margin-bottom: 0px;
+  }
+}
+.swp-assessment {
+  .th-td-style {
+    vertical-align: middle !important;
+    height: auto !important;
+    .customCheck {
+      .q-field__inner {
+        padding: 10px !important;
+      }
+      .q-field__control-container {
+        padding-top: 0px !important;
+        height: auto !important;
+      }
+      .q-field__native {
+        height: auto !important;
+        min-height: fit-content !important;
+        border-width: 0px;
+      }
+      .q-field__bottom {
+        display: none;
+      }
+    }
+  }
+
+  .th-style {
+    background: #eeeeee !important;
+    font-weight: 700;
+    width: 100%;
+  }
+
+  .td-style {
+    width: 16.6%;
+  }
+}
+.alert-info {
+  color: #0b5885;
+  background-color: #d0eeff;
+  border-color: #bee7ff;
+}
+// swpFire.vue
+.permit-table-info-banner {
+  position: relative;
+  top: 150px;
+  left: 50%;
+  transform: translate(-50%);
+  width: 80%;
+  z-index: 1000;
+}
+// 작업허가서 [E]
+
+// 작업허가 현황 [S]
+.workPermitGraph {
+  .workPermitGraphMarkImage {
+    padding: 0px !important;
+    text-align: center;
+    font-size: 20px;
+    color: tomato;
+    border: none;
+    .workPermitGraphMarkImageAbbreviationParent {
+      text-align: start;
+      position: absolute;
+      .workPermitGraphMarkImageAbbreviation {
+        cursor: pointer;
+        display: inline-block;
+        width: 100%;
+        background-color: reba(0,0,0,0.2) !important;
+        border: 1px solid #757575;
+        border-radius: 5px;
+        .markImage-tran {
+          border-radius: 5px;
+        }
+        .workPermitGraphMarkImageAbbreviationBannerDetail {
+          border-radius: 5px;
+          .q-banner__avatar i {
+            font-size: 20px !important;
+          }
+          .q-banner__content {
+            font-size: 12px !important;
+          }
+        }
+      }
+    }
+  }
+  .workPermitGraphMarkImageAbbreviation > div {
+    -webkit-animation: fadeInFromNone 0.1s ease-out;
+    -moz-animation: fadeInFromNone 0.1s ease-out;
+    -o-animation: fadeInFromNone 0.1s ease-out;
+    animation: fadeInFromNone 0.1s ease-out;
+  }
+
+  .workPermitGraphMarkImageAbbreviationCaption {
+    font-size: 0.9em;
+    // font-style: italic;
+    white-space: normal;
+    color: #555;
+  }
+
+  .workPermitGraphCarousel {
+    height: var(--map-height) !important;
+    width: 41vw !important;
+    .q-carousel--padding,
+    .q-carousel__slide {
+      padding: 0 !important;
+      position: relative;
+    }
+    .q-carousel__slide {
+      width: calc(var(--map-ratio) * var(--map-height)) !important;
+      background-size: calc(var(--map-ratio) * var(--map-height)) var(--map-height);
+    }
+    .q-carousel--padding,
+    .q-carousel__slide {
+      padding: 0 !important;
+    }
+    .q-carousel__arrow {
+      transition: all 0.5s;
+      opacity: 0.2;
+    }
+    .q-carousel__arrow:hover {
+      transition: all 0.5s;
+      opacity: 0.8;
+    }
+  }
+  .workPermitGraphMapTitleDiv {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    border-radius: 10px;
+    background-color: #283046 !important;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: 700;
+    z-index: 2;
+    font-size: 12px;
+  }
+}
+// 작업허가 현황 [E]
+
+// 개선 이행율  ./impr-action-rate.scss
+
+// 화학자재 [S]
+// chemEtc
+.msdsc {
+  margin-top: 10px;
+}
+.pmsds > .cardheader {
+  padding-top: 0px !important;
+  padding-bottom: 10px !important;
+}
+.chemExampleItem .q-checkbox .q-checkbox__inner {
+  margin: auto !important;
+}
+.chemExampleItem .inline {
+  display: block !important;
+}
+.noselectImg {
+  opacity: 0.2;
+}
+.chemPicCheckbox {
+  .q-checkbox__label,
+  .q-checkbox__inner {
+    display: inline !important;
+    float: left !important;
+  }
+  .q-checkbox__inner {
+    font-size: 30px !important;
+  }
+  .q-checkbox__label {
+    line-height: 28px;
+  }
+}
+// chemVertification
+.chemVertificationTable {
+  .th-td-style {
+    vertical-align: middle !important;
+  }
+  .th1-style {
+    background: #eeeeee !important;
+    font-weight: 700;
+    width: 100%;
+  }
+  .th2-style {
+    background: #eeeeee !important;
+    font-weight: 700;
+    width: 50%;
+  }
+  .td1-style {
+    width: 8%;
+  }
+  .td2-style {
+    width: 42%;
+    padding: 8px !important;
+  }
+  .td3-style {
+    width: 50%;
+  }
+}
+// chemGhsResult
+.ghsinfodetail {
+  padding-bottom: 10px !important;
+  margin-top: -20px;
+}
+.picCard .customCardbody {
+  padding: 10px !important;
+  margin: 0 !important;
+}
+.chemGhsResultPicContainer .q-checkbox {
+  margin: auto !important;
+}
+.chemGhsResultPicContainer .inline {
+  display: block !important;
+}
+.noselectImg {
+  opacity: 0.2;
+}
+.chemGhsResultPicCheckbox {
+  .q-checkbox__label,
+  .q-checkbox__inner {
+    display: inline !important;
+    float: left !important;
+  }
+  .q-checkbox__inner {
+    font-size: 30px !important;
+  }
+  .q-checkbox__label {
+    line-height: 28px;
+  }
+}
+// chemLaw
+.chemLawRegulBillDiv {
+  color: #0072c6 !important;
+  font-size: 13px !important;
+  font-weight: 600;
+}
+.chemLawRegulCheckbox {
+  margin-bottom: 10px;
+}
+// chemComponents
+.chemComponentsCheckbox {
+  padding-bottom: 0px !important;
+  .q-field__native {
+    border-width: 0px;
+  }
+  .q-field__control-container {
+    padding-top: 0px !important;
+  }
+  .q-field__bottom {
+    display: none;
+  }
+  .q-field__label {
+    display: none;
+  }
+  .q-field__control {
+    min-height: 28px !important;
+  }
+  .q-field__control:after {
+    display: none;
+  }
+  .q-field__inner {
+    padding-bottom: 0px !important;
+  }
+}
+.chemComponentsCheckbox.under_border.q-field--filled .q-field__control {
+  border-width: 0px 0px 0px 0px !important;
+}
+// 화학자재 [E]
+
+// 위험성평가 Matrix[S] matrixDetail.vue
+.range-input {
+  div > div {
+    height: 30px !important;
+  }
+  input {
+    padding: 0px !important;
+  }
+}
+
+.risk-name::after {
+  direction: ltr;
+  display: inline-block;
+  font-family: 'Material Icons';
+  font-size: 11px;
+  color: #2196f3;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  font-feature-settings: 'liga';
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  content: 'edit';
+}
+
+.risk-standards [class*='col-']:first-child {
+  padding-top: 20px !important;
+}
+.risk-standards .q-item {
+  padding-left: 0px !important;
+}
+.risk-standards .customCardbody {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.risk .q-field--with-bottom {
+  padding-bottom: 0px !important;
+}
+
+.risk {
+  .custom-text-before {
+    font-size: 12px !important;
+    height: 22px !important;
+    min-height: 22px !important;
+    line-height: 22px;
+  }
+  .q-field--dense .q-field__inner {
+    padding-bottom: 0 !important;
+    padding-top: 3px !important;
+  }
+  .customText.q-field--dense .q-field__control,
+  .customText.q-field--dense .q-field__marginal {
+    height: 22px !important;
+    min-height: 22px !important;
+  }
+}
+.matrix-risk-popedit {
+  .q-field__native {
+    color: #000;
+  }
+}
+// 위험성평가 Matrix[E]
+
+// 규제DB업로드 regulDbUploadDetail[S]
+.regul-db-spinner {
+  color: #3498db;
+}
+.regul-db-complete-icon {
+  font-size: 5.5em;
+}
+
+.regul-db-loading-style {
+  background: white; /* #3498db; */
+  height: 600px;
+}
+.regul-db-loading-style-text {
+  font-size: 2.1em;
+  font-weight: 600;
+}
+.regul-db-loading-style-text-sub {
+  font-size: 1.1em;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.regul-db-animation {
+  color: rgba(0, 0, 0, 0.3);
+}
+.regul-db-animation:before {
+  content: attr(data-text);
+  position: absolute;
+  overflow: hidden;
+  max-width: 100%;
+  white-space: nowrap;
+  color: #3498db;
+  animation: loading 3s linear;
+  animation-iteration-count: infinite;
+}
+
+// @keyframes loading {
+//   0% {
+//     max-width: 0;
+//   }
+// }
+// 규제DB업로드[E]
+
+// 입출고 관리대장 inoutManagementDetail[S]
+.chem-inout-info {
+  margin-top: -20px !important;
+}
+.inout-facility {
+  display: inline-block;
+  label {
+    padding-bottom: 0px !important;
+  }
+  .q-field__inner {
+    padding-bottom: 0px !important;
+  }
+}
+// 입출고 관리대장[E]
+
+// 근골격계 증상설문 [S] symptomSurveyDetail.vue
+.th-style {
+  background: #eeeeee !important;
+  font-weight: 700;
+}
+
+.th-style-1 {
+  width: 10%;
+}
+
+.td-style-1 {
+  width: 15%;
+}
+
+.td-style-2 {
+  width: 65%;
+}
+
+.td-style-3 {
+  width: 90%;
+}
+
+.custom-text-before-parent {
+  .custom-text-before {
+    font-size: 12px !important;
+    height: 22px !important;
+    min-height: 22px !important;
+    line-height: 22px;
+  }
+  .q-field--dense .q-field__inner {
+    padding-bottom: 0 !important;
+    padding-top: 3px !important;
+  }
+  .customText.q-field--dense .q-field__control,
+  .customText.q-field--dense .q-field__marginal {
+    height: 22px !important;
+    min-height: 22px !important;
+  }
+}
+
+.lastQue {
+  label {
+    padding-bottom: 0px !important;
+  }
+}
+// 근골격계 증상설문 [E]
+
+// 위험성평가 [S]
+.risk-process-chips {
+  border-radius: 5px;
+  background-color: #eaeceb;
+}
+// 위험성평가 [E]
+
+// 사전 검토 chemReviewDetail[S]
+.chemReviewDiv {
+  width: 100%;
+  height: 30px;
+  .q-btn-group {
+    position: absolute;
+    right: 0px;
+    padding-right: 10px;
+  }
+}
+// 사전 검토 [E]
+
+// 위험성평가 시나리오  [S]
+.scenario-chip i {
+  margin-right: -0.2em !important;
+}
+.scenario-view-group {
+  button {
+    margin: 0 !important;
+  }
+}
+
+.scenario-card-title {
+  margin-left: -5px;
+  font-size: 0.8rem;
+  line-height: 1.4rem !important;
+}
+.scenario-card-side {
+  text-align: center;
+  align-self: center;
+}
+.card-risk-item {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  min-height: auto;
+}
+.card-risk-info {
+  width: auto;
+  min-width: 0;
+  max-width: 100%;
+  flex: 10000 1 0%;
+  display: flex;
+  border-radius: 10px;
+  font-size: 1rem;
+  height: 30px;
+}
+.before-risk {
+  background: #3a98b9;
+  margin-right: 5px;
+}
+.after-risk {
+  background: #3a98b9;
+  margin-left: 5px;
+}
+.risk-number {
+  font-size: 1.3rem;
+}
+
+.detail-risk {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.detail-risk-num {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #e63946;
+}
+
+.card-scenario-list {
+  padding: 0px 16px !important;
+  min-height: 28px;
+  height: auto;
+  .q-icon {
+    cursor: pointer;
+  }
+}
+
+div.scenario4m {
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  div.col-12 {
+    padding: 0 !important;
+    margin: 0 !important;
+    .q-uploader--bordered {
+      border: 0 !important;
+    }
+    .custom-upload-picture {
+      border-radius: 0 !important;
+      overflow: hidden !important;
+      .q-uploader__list {
+        overflow: hidden !important;
+        .empty_dscription {
+          display: none !important;
+        }
+        .update-picture-card {
+          height: 35px !important;
+          .upload-picture {
+            height: 35px !important;
+          }
+        }
+      }
+    }
+  }
+}
+.scenarioDiv {
+  margin: 0 !important;
+  padding: 0 !important;
+  div.col-6 {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+div.col-3 {
+  .q-item {
+    padding: 2px 6px !important;
+  }
+}
+div.scenario4m2 {
+  .empty_dscription {
+    display: none;
+  }
+}
+.improveFlag {
+  position: relative;
+  top: -10px;
+}
+.charm-scenario,
+.charm-estimation {
+  .scenario-view-group {
+    button {
+      margin: 0 !important;
+    }
+  }
+
+  .scenario-card-title {
+    margin-left: -5px;
+    font-size: 0.8rem;
+  }
+
+  .scenario-card-side {
+    text-align: center;
+    align-self: center;
+  }
+
+  .card-risk-item {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    min-height: auto;
+  }
+  .card-risk-info-charm {
+    margin-top: 0px;
+    width: auto;
+    min-width: 120px;
+    max-width: 100%;
+    flex: 10000 1 0%;
+    display: flex;
+    border-radius: 10px;
+    font-size: 1rem;
+    height: 40px;
+  }
+  .before-risk {
+    background: #3a98b9;
+    margin-right: 5px;
+  }
+  .after-risk {
+    background: #3a98b9;
+    margin-left: 5px;
+  }
+  .risk-number {
+    font-size: 1.3rem;
+  }
+
+  .detail-risk {
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  .detail-risk-num-charm {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #e63946;
+    height: 40px;
+  }
+
+  .card-scenario-list {
+    padding: 0px 16px !important;
+    min-height: 28px;
+  }
+
+  .upload-picture {
+    width: 200px;
+    height: 120px;
+    height: calc(var(--height-var) - 5px);
+    object-fit: fill;
+  }
+}
+.charm-estimation {
+  .cardClassDetailForm {
+    padding: 0px !important;
+  }
+  .scenario-chip i {
+    margin-right: -0.2em !important;
+  }
+  .font {
+    color: red;
+    font-size: 14px;
+    font-weight: bolder;
+  }
+  .font2 {
+    padding-top: 20px !important;
+    width: 500px;
+    color: red;
+    font-size: 14px;
+    font-weight: bolder;
+  }
+  .font3 {
+    color: red;
+    font-size: 14px;
+    font-weight: bolder;
+  }
+  .font4 {
+    padding-top: 20px !important;
+    color: red;
+    font-size: 14px;
+    font-weight: bolder;
+  }
+  .charm {
+    .q-pa-sm {
+      padding: 0 10px 10px 10px !important;
+    }
+  }
+}
+// 위험성평가 시나리오  [E]
+
+// PSM 보고서
+.folder-tree > .customCardbody {
+  padding-bottom: 15px !important;
+  margin-top: 0px !important;
+  margin-bottom: 20px !important;
+}
+.context-title {
+  background-color: #e9e9e9;
+}
+
+// 변경관리 완료 STEP mocOnepageNormal[S]
+.moc-timeline {
+  max-height: 550px;
+  .q-timeline__heading-title {
+    padding-bottom: 10px;
+  }
+}
+.moc-complete .customTextArea.q-field--dense .q-field__inner {
+  padding-top: 20px !important;
+  padding-bottom: 2px !important;
+}
+// 변경관리 완료 STEP [E]
+// 메인화면
+
+.main-work-permit-card-cursor {
+  cursor: pointer;
+}
+.maindashboard-director {
+  .main-work-permit-card-light-blue {
+    border-top: 2px solid #03a9f4;
+  }
+  .main-work-permit-card-amber {
+    border-top: 2px solid #ffc107;
+  }
+  .main-work-permit-card-light-green {
+    border-top: 2px solid #8bc34a;
+  }
+
+  .safcon-left {
+    padding-top: 50px !important;
+  }
+  .safcon-left-text {
+    padding-top: 20px;
+    font-size: 2em;
+    font-weight: 800;
+  }
+  .safcon-right {
+    margin-top: 0px;
+  }
+  .safcon-circle {
+    width: 54px;
+    height: 54px;
+    background-color: rgb(202, 200, 200);
+    border-radius: 50%;
+    display: inline-block;
+    margin: 2px;
+    padding-top: 15px;
+    color: #fff;
+    font-weight: 600;
+  }
+  .safconDate {
+    margin-top: 10px;
+    padding-top: 2px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border: 1px solid #cccdcf;
+    border-radius: 10px;
+    margin-bottom: 15px;
+  }
+  .safconTeam {
+    border-radius: 10px;
+    background-color: #4caf50;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important;
+    font-size: 1.05em;
+    color: #fff;
+    .col-12,
+    .col-6 {
+      padding: 1.5px !important;
+    }
+  }
+  .safconTeam .col-12 {
+    font-size: 1.05em;
+    font-weight: 600;
+  }
+  .safconbox {
+    padding: 0px 6px;
+    background-color: #161d31;
+    font-weight: 600;
+    text-align: center;
+    color: red;
+    margin-left: 5px;
+  }
+  .safconimgOn {
+    cursor: pointer;
+  }
+
+  .mainAccTypeChip {
+    border: 0px !important;
+    margin: 0px !important;
+    .ellipsis {
+      font-size: 0.9em;
+    }
+  }
+  .card-header23 .mainAccTypeChip:first-child {
+    margin-left: 6px !important;
+  }
+  .mainAccTypeChip:focus {
+    box-shadow: none !important;
+  }
+  .no-padding-top {
+    padding-top: 0px !important;
+  }
+  .lawcheckIcon {
+    width: 16px;
+    height: 16px;
+    margin: 0 auto;
+    border-radius: 50%;
+    margin-top: 3px;
+    cursor: pointer;
+  }
+  .lawcheckIcon2 {
+    width: 12px;
+    height: 12px;
+    margin: 0 auto;
+    border-radius: 50%;
+    margin-top: 3px;
+    cursor: pointer;
+  }
+  .accTypeIcons {
+    float: right;
+    display: flex;
+    font-size: 0.8em !important;
+    margin-right: 25px;
+    padding-top: 5px;
+  }
+  .accTypeIcons > div {
+    margin-right: 5px;
+  }
+
+  .card-header23 + .card-body {
+    padding-top: 0px !important;
+  }
+  .mapWorkIcons {
+    position: absolute;
+    opacity: 0.65;
+    /* background-color: lightgrey;   */
+    /* border-radius: 10px; */
+    right: -70px;
+    bottom: 0px;
+    padding: 5px 10px;
+    font-weight: 700;
+    line-height: 20px;
+    z-index: 8;
+    font-size: 11px;
+  }
+  .mapWorkIcons .q-item {
+    padding: 0px 10px;
+  }
+  .mapWorkIcons ul {
+    list-style-type: none;
+    margin-bottom: 0px !important;
+    padding-left: 6px;
+  }
+  .mapTitleDiv {
+    position: absolute;
+    right: -70px;
+    top: 0px;
+    border-radius: 10px;
+    background-color: rgba(0, 143, 251, 0.75) !important;
+    color: #fff;
+    padding: 5px 10px;
+    font-weight: 700;
+    z-index: 10;
+    font-size: 12px;
+  }
+  .mapWorkIcons .q-card__section {
+    padding: 4px !important;
+  }
+  .fullscreen-btn {
+    .q-btn__wrapper {
+      min-width: 10px !important;
+      min-height: 10px !important;
+    }
+  }
+  .no-padding {
+    padding: 0px 0px 6px 0px !important;
+  }
+  .cardcontents {
+    box-shadow: 0 !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    border-radius: 10px !important;
+    .card-body {
+      padding: 10px;
+      border-radius: 0 0 10px 10px !important;
+      background: #fff;
+    }
+    .card-header:before {
+      font-family: 'Material Icons';
+      padding-right: 0.325rem;
+      content: '\e876';
+    }
+    .card-header {
+      border-bottom-width: 0px !important;
+      border-radius: 10px 10px 0 0 !important;
+      padding-left: 1rem;
+      height: 40px;
+      color: #0072c6;
+      background: #f8f8f9;
+      display: inline-block;
+      padding-top: 8px;
+      width: 100%;
+      font-weight: bold;
+      font-size: 0.9rem;
+      .card-more {
+        float: right !important;
+        cursor: pointer;
+        color: #d2d2d2;
+      }
+      .card-more:hover {
+        color: #1ab394;
+      }
+    }
+    .card-header23 {
+      border-bottom-width: 0px !important;
+      border-radius: 0 0 0 0 !important;
+      height: 40px;
+      background: #fff;
+      color: #0072c6;
+      display: inline-block;
+      padding-top: 8px;
+      width: 100%;
+      .card-more {
+        float: right !important;
+        cursor: pointer;
+        color: #d2d2d2;
+      }
+      .card-more-add {
+        float: right !important;
+        cursor: pointer;
+        color: #d2d2d2;
+        padding-right: 10px;
+      }
+      .card-more-add:hover {
+        color: #1ab394;
+      }
+      .card-more:hover {
+        color: #1ab394;
+      }
+      .inputClass {
+        background: #fff !important;
+      }
+    }
+  }
+  .main-header-input {
+    margin-top: -5px;
+    padding-right: 5px;
+    .customSelect {
+      .q-field__control-container {
+        padding-top: 6px;
+      }
+      .q-field__control {
+        min-height: 26px;
+      }
+      .q-field__marginal {
+        height: 26px;
+      }
+      .q-field__native {
+        min-width: 100px;
+        min-height: 26px !important;
+      }
+      .q-field__append {
+        padding-top: 2px;
+        position: absolute;
+        right: 6px;
+        top: 0px;
+      }
+    }
+  }
+  .main-header-input2 {
+    margin-top: -5px;
+    padding-right: 5px;
+    width: 240px !important;
+    .customDate {
+      padding-bottom: 0 !important;
+      .q-field__inner {
+        padding: 0 !important;
+      }
+    }
+  }
+  .cardcontents .card-body.nopadgrid {
+    padding-top: 0px !important;
+  }
+  .btn-fixed-width-height {
+    width: 95%;
+    margin: 3px !important;
+    pointer-events: none;
+  }
+
+  .directorMainLayer {
+    .workPermit-carousel {
+      border-radius: 10px;
+      height: var(--map-height) !important;
+      .q-carousel__slide {
+        width: calc(var(--map-ratio) * var(--map-height)) !important;
+        max-width: calc(var(--map-ratio) * var(--map-height)) !important;
+        position: relative;
+      }
+      .q-carousel--padding,
+      .q-carousel__slide {
+        padding: 0 !important;
+      }
+      .q-carousel__arrow {
+        transition: all 0.5s;
+        opacity: 0.2;
+      }
+      .q-carousel__arrow:hover {
+        transition: all 0.5s;
+        opacity: 0.8;
+      }
+    }
+    .caption-work2 {
+      font-size: 0.9em;
+      white-space: normal;
+      color: #fff;
+      padding: 10px;
+    }
+    .caption-work {
+      font-size: 0.9em;
+      // font-style: italic
+      white-space: normal;
+      color: #555;
+      margin-top: 4px;
+    }
+    .mainmapstart {
+      float: right;
+      margin-right: 0px;
+      margin-top: -5px;
+    }
+    .mainMarkImage {
+      padding: 0px !important;
+      font-size: 20px;
+      height: 30px !important;
+      border-width: 0px;
+      position: absolute;
+      padding: 16px;
+      color: #c10015;
+      z-index: auto !important;
+      .markImage-abbreviation-parent {
+        text-align: start;
+        position: absolute;
+        .markImage-abbreviation {
+          cursor: pointer;
+          display: inline-block;
+          width: auto;
+          border: 1px solid #757575;
+          border-radius: 5px;
+          .markImage-tran {
+            border-radius: 5px;
+          }
+          .markImage-abbreviation-banner {
+            border-right: 1px solid #757575;
+            display: inline-block;
+            text-align: center;
+            min-width: 60px;
+            padding: 1px !important;
+            border-radius: 5px 0px 0px 5px;
+            i {
+              font-size: 20px;
+            }
+            div {
+              font-size: 12px !important;
+            }
+          }
+          .markImage-abbreviation-banner.last-banner {
+            border-right: 0;
+            border-radius: 0px 5px 5px 0px;
+          }
+          .markImage-abbreviation-plus {
+            display: inline-block;
+            text-align: center;
+            min-width: 40px;
+          }
+          .markImage-abbreviation-banner-detail {
+            border-radius: 5px;
+            .q-banner__avatar i {
+              font-size: 20px !important;
+            }
+            .q-banner__content {
+              font-size: 12px !important;
+            }
+          }
+        }
+      }
+    }
+    .markImage-abbreviation > div {
+      -webkit-animation: fadeInFromNone 0.1s ease-out;
+      -moz-animation: fadeInFromNone 0.1s ease-out;
+      -o-animation: fadeInFromNone 0.1s ease-out;
+      animation: fadeInFromNone 0.1s ease-out;
+    }
+  }
+}
+
+.main-work-permit-card-section2 {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  cursor: pointer;
+}
+.main-work-permit-card-section1 {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+// 유해위험기계기구 점검
+
+.inspectionSubjectFlag-blinking {
+  -webkit-animation: inspectionSubjectFlag-blink 3s ease-in-out infinite alternate;
+  -moz-animation: inspectionSubjectFlag-blink 3s ease-in-out infinite alternate;
+  animation: inspectionSubjectFlag-blink 3s ease-in-out infinite alternate;
+}
+@-webkit-keyframes inspectionSubjectFlag-blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes inspectionSubjectFlag-blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes inspectionSubjectFlag-blink {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+div[content-class='hazardequip-menu-layer'] {
+  z-index: 10;
+}
+
+// 화학물질 상세컬럼 셋팅 chemBaseColumnSetting [S]
+.chem-column-setting-th-td-style {
+  vertical-align: middle !important;
+}
+.chem-column-setting-th-style {
+  background: #eeeeee !important;
+  font-weight: 700;
+  width: 100%;
+}
+
+.chem-column-setting-td-style {
+  width: 16.6%;
+}
+.chemBaseColumnSettingCard {
+  .q-field__control {
+    min-height: 0 !important;
+    margin-bottom: 4px;
+  }
+  .q-field__control-container {
+    padding-top: 0px !important;
+  }
+  .q-field__bottom {
+    padding-top: 0px !important;
+    min-height: 0 !important;
+  }
+  .q-field__native {
+    border: none !important;
+    border-radius: 0 !important;
+    background-color: transparent !important;
+  }
+  .q-field--disabled .q-field__control-container .q-field__native {
+    background-color: transparent !important;
+  }
+}
+// 화학물질 상세컬럼 셋팅 chemBaseColumnSetting [E]
+
+// 밀폐공간위치 및 위험물보관소 배치도
+.markImage {
+  padding: 0px !important;
+  text-align: center;
+  font-size: 20px;
+}
+.q-img__content > .markImage {
+  background-color: rgba(0, 0, 0, 0.1);
+  font-weight: 700; 
+  color: #383838;
+  // border: 1px dashed #1976D2 !important;
+}
+.q-img__content > .markImage.active {
+  border: 2px dashed tomato !important;
+}
+.q-img__content > div {
+  background: rgba(0, 0, 0, 0);
+}
+#zoomerImage {
+  margin: 0 auto;
+}
+.q-img__content > .absolute-bottom {
+  position: absolute;
+  padding: 16px;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.47);
+}
+.mainMarkImage.active {
+  border: 2px dashed tomato !important;
+}
+.mainMarkImage {
+  padding: 0px !important;
+  text-align: center;
+  font-size: 20px;
+  position: static;
+  padding: 16px;
+  color: blue;
+
+  .markImage-abbreviation-parent {
+    text-align: start;
+    position: absolute !important;
+    border: 1px solid #757575 !important;
+    border-radius: 5px !important;
+    background-color: rgba(208, 230, 253, 0.7);
+    .markImage-abbreviation {
+      display: inline-block;
+      width: auto;
+      .markImage-abbreviation-banner {
+        display: inline-block;
+        text-align: center;
+        min-width: 60px;
+        font-size: 25px;
+      }
+      .markImage-abbreviation-banner.last-banner {
+        border-right: 0;
+      }
+      .markImage-abbreviation-plus {
+        display: inline-block;
+        text-align: center;
+        min-width: 40px;
+      }
+      .markImage-abbreviation-banner-detail {
+        padding: 5px !important;
+      }
+    }
+  }
+}
+.caption-work {
+  font-size: 0.8em;
+  white-space: normal;
+  color: #555;
+}
+.caption-header {
+  font-size: 0.8em;
+  font-weight: 700;
+  white-space: normal;
+  color: #555;
+}
+.map-carousel {
+  height: var(--map-height) !important;
+  .q-carousel--padding,
+  .q-carousel__slide {
+    padding: 0 !important;
+  }
+  .q-carousel__arrow {
+    transition: all 0.5s;
+    opacity: 0.2;
+  }
+  .q-carousel__arrow:hover {
+    transition: all 0.5s;
+    opacity: 0.8;
+  }
+  .q-carousel__slides-container > .q-panel.scroll {
+    overflow: hidden !important;
+  }
+}
+.mapTitleDiv {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  border-radius: 10px;
+  background-color: #283046 !important;
+  color: #fff;
+  padding: 5px 10px;
+  font-weight: 700;
+  z-index: 10;
+  font-size: 12px;
+}
+
+// 뇌심혈관계 조사
+.bcs-user-info-card {
+  .customCardbody {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .bcs-user-info {
+    font-size: 1.1rem;
+    text-align: center;
+    font-weight: 600;
+    color: #3d3d3d;
+  }
+}
+.bcs-risk-assess-card {
+  .customCardbody {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .chart {
+    background: #fff;
+    padding-top: 15px !important;
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+    border-right: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .mt-5 {
+    margin-bottom: 20px !important;
+  }
+  .container-counter {
+    text-align: center !important;
+    padding-top: 15px;
+    .widget-subheading {
+      color: #777777;
+    }
+    .widget-numbers {
+      color: #e75404;
+      font-weight: 700;
+    }
+    .big-counter {
+      font-size: 2.5rem;
+    }
+    .big-counter-description {
+      font-size: 2rem;
+    }
+    .middle-counter {
+      font-size: 2rem;
+    }
+    .middle-counter-description {
+      font-size: 1.3rem;
+    }
+    .small-counter {
+      font-size: 1.5rem;
+    }
+    .small-counter-description {
+      font-size: 1.1rem;
+    }
+  }
+}
+// 화학자재 검증, 구매전검토 검증
+// chemVerification, chemReviewVerification
+.bg-amber {
+  background-color: #ffc107;
+}
+.divchklaw {
+  margin-bottom: 15px;
+  .customqcbox {
+    line-height: 30px;
+  }
+}
+.th2-style {
+  background: #eeeeee !important;
+  font-weight: 700;
+  line-height: 28px;
+}
+// + solvingQuiz
+.groupTitle {
+  color: #0072c6 !important;
+  font-size: 13px !important;
+  font-weight: 600;
+}
+// 공통
+.mb15 {
+  margin-bottom: 15px !important;
+}
+.mb-2 {
+  margin-bottom: 20px !important;
+}
+.mb-1 {
+  margin-bottom: 10px !important;
+}
+// 소방 연간 훈련/교육 계획 상세 _ fireFightingTraningEduYearDetail
+.fire-fighting-traning-edu-year-gubun-tr {
+  color: white !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  font-weight: 700 !important;
+  font-size: 1.2em;
+}
+
+.video-detail {
+  padding: 10px;
+  video::-webkit-media-controls-play-button {
+    display: none !important;
+  }
+  video::-webkit-media-controls-timeline {
+    display: none !important;
+  }
+
+  .signature-border {
+    border: 1px solid #888888;
+  }
+
+  .vod-label-div {
+    padding-bottom: 10px;
+    font-weight: 600;
+  }
+  .vod-label-div2 {
+    padding-top: 20px;
+    padding-bottom: 10px;
+  }
+  .vod-label-layer {
+    border: 1px solid #d8d7d7;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    padding: 10px !important;
+  }
+  .vod-label-layer-vod {
+    border: 1px solid #d8d7d7;
+    background-color: #fdfdfd;
+    border-radius: 10px;
+    padding: 10px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .player-center {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .vjs-control-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  .vod-top-layer {
+    background-color: #2196f3;
+    padding: 10px !important;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #fff;
+  }
+  .vod-label-div-text {
+    margin-top: 10px;
+    font-weight: 600;
+    font-size: 1em;
+    line-height: 24px;
+  }
+}
+
+.divquizsolve > .q-checkbox {
+  display: flex !important;
+  padding-top: 6px;
+  padding-left: 12px;
+}
+.divquizsolve > .q-checkbox:last-child {
+  padding-bottom: 12px;
+}
+.divquizsolve > .q-checkbox__label {
+  font-size: 1.15em !important;
+}
+.divquizsolve > .groupTitle {
+  font-size: 1.2em;
+  color: blue;
+}
+
+.passwordChangeArea {
+  .titleArea {
+    width: 100%;
+    .title {
+      font-size: 2em;
+      font-weight: 700;
+      text-align: center;
+      .emphasis {
+        color: #c10015;
+      }
+    }
+    .subtitle {
+      font-size: 1.05em;
+      font-weight: 500;
+    }
+  }
+}
+// 유해위험기계기구 배치도
+.hazardequip-card {
+  .customCardbody {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+// 위험성평가
+.fmInfo {
+  .upload-cover {
+    min-height: 0 !important;
+    .uploaded-file-list {
+      height: 100px !important;
+      max-height: 100px !important;
+      min-height: 100px !important;
+      .nofileArea {
+        height: 50px !important;
+      }
+    }
+  }
+}
+.scenario {
+  font-size: 13px !important;
+  margin-top: 20px !important;
+  .q-item {
+    background-color: #f4f4f4 !important;
+    height: 40px !important;
+    .q-item__section--main {
+      color: #1976D2 !important;
+    }
+    .q-item__label {
+      font-size: 13px !important;
+    }
+  }
+}
+.risk {
+  .q-uploader--bordered {
+    border: 0 !important;
+  }
+}
+.mb-4 {
+  margin-bottom: 40px !important;
+}
+.mb-2 {
+  margin-bottom: 20px !important;
+}
+.mb-1 {
+  margin-bottom: 10px !important;
+}
+.mt-4 {
+  margin-top: 40px !important;
+}
+.mt-3 {
+  margin-top: 30px !important;
+}
+.mt-2 {
+  margin-top: 20px !important;
+}
+.m-4 {
+  margin: 40px !important;
+}
+.m-2 {
+  margin: 20px !important;
+}
+// 동영상 교육 수강
+.my-3 {
+  margin: 30px auto !important;
+}
+.my-2 {
+  margin: 20px auto !important;
+}
+.my-1 {
+  margin: 10px auto !important;
+}
+.iconWrapper {
+  .q-icon {
+    font-size: 1.6em;
+  }
+}
+.ml-10 {
+  margin-left: 10px;
+}
+.mx-10 {
+  margin: 0 10px;
+}

@@ -1,0 +1,44 @@
+// src/assets/style/version3.scss
+
+// Version 3 SCSS styles for the web page layout
+
+$primary-color: #3498db;
+$secondary-color: #2ecc71;
+$font-stack: 'Helvetica Neue', Arial, sans-serif;
+
+body {
+  font-family: $font-stack;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: $primary-color;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.sidebar {
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  padding: 15px;
+  width: 250px;
+  float: left;
+}
+
+.content {
+  margin-left: 270px;
+  padding: 15px;
+}
+
+footer {
+  background-color: $secondary-color;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}

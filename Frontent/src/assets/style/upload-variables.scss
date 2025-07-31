@@ -1,0 +1,222 @@
+// 업로드 컴포넌트 (Default)
+.upload-cover {
+  margin-top: 0px !important;
+  min-height: 220px !important;
+  .custom-upload {
+    width: 100%;
+    min-height: 200px !important;
+    max-height: 200px !important;
+    .q-btn {
+      margin-top: 0px !important;
+      margin-left: 0px !important;
+    }
+  }
+  .fileuploadItem {
+    min-height: 26px !important;
+    padding: 4px 16px;
+  }
+  .q-uploader__header {
+    background: $default-color !important;
+    height: 30px;
+    line-height: 30px;
+    padding: 0px 10px;
+  }
+  .bg-custom-upload-color {
+    background-color: $default-color;
+  }
+  .text-custom-upload-color {
+    color: $default-color !important;
+  }
+  .uploaded-file-list {
+    background-color: #fff;
+    border-top: 2px solid $default-color;
+    max-height: 200px !important;
+    min-height: 200px !important;
+    overflow-y: auto;
+  }
+  .uploaded-file-list_rev {
+    max-height: 180px !important;
+    min-height: 180px !important;
+    overflow-y: auto;
+  }
+  .uploaded-file-list-table > .q-item {
+    padding: 0px 2px;
+    min-height: 28px;
+  }
+  .uploaded-file-list2 {
+    border-top: 2px solid #cfcdcd;
+    overflow-y: hidden;
+  }
+  .q-item__section--main ~ .q-item__section--side {
+    padding-left: 4px !important;
+  }
+  .cursor-move {
+    cursor: move;
+  }
+  .rounded-borders {
+    border-radius: 10px;
+    .q-expansion-item > .q-expansion-item__container > .q-item--clickable {
+      border-radius: 10px 10px 0 0;
+    }
+  }
+  .custom-upload.q-uploader--disable {
+    min-height: 200px !important;
+  }
+  .q-uploader--disable {
+    max-height: 36px !important;
+    min-height: 20px !important;
+  }
+  .empty_dscription {
+    font-size: 14px;
+    color: #909399;
+    margin-bottom: 0 !important;
+  }
+  .file-origin-name {
+    line-height: 2em !important;
+  }
+  .file-description {
+    .q-field--with-bottom {
+      padding-bottom: 0px !important;
+    }
+    .q-field--dense .q-field__inner {
+      padding-bottom: 0px !important;
+    }
+  }
+  .txtfileinfo {
+    padding-left: 0px !important;
+    word-break: break-all;
+    font-size: 12px;
+  }
+  .nofileArea {
+    height: 196px;
+    font-size: 0.95em !important;
+  }
+
+  .before-file-list-toolbar {
+    min-height: 20px !important;
+    .q-toolbar__title {
+      font-size: 1em !important;
+    }
+  }
+  .fixPreviewB {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid #cccccc;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: #f8f8f8;
+  }
+  .preview-close-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    z-index: 99;
+  }
+  .upload-title-font {
+    font-weight: 600;
+    font-size: 12px;
+  }
+}
+
+.fullWidth .custom-upload {
+  width: 100%;
+}
+
+.preview-image-card {
+  min-width: 800px;
+  .q-carousel {
+    height: 750px !important;
+  }
+  > .preview-close-btn {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+}
+// Vue페이지별 Upload CSS 변경
+
+// CExcelUpload [S]
+.excel-upload-cover {
+  margin-top: 5px !important;
+  height: 700px;
+  .custom-split-tab-card {
+    border-radius: 0;
+  }
+  .q-tab-panel {
+    border-radius: 10px 10px 0 0;
+    .default-table {
+      border-radius: 0px !important;
+    }
+  }
+  .q-tabs {
+    margin-left: 10px;
+    margin-bottom: -5px;
+  }
+  .q-uploader__header {
+    background: $default-color !important;
+    height: 30px;
+    line-height: 30px;
+    padding: 0px 10px;
+  }
+  .excel-upload {
+    .q-btn {
+      margin-top: 0px !important;
+      margin-left: 0px !important;
+      padding: 2px 10px;
+    }
+  }
+  .excel-upload.q-uploader--disable {
+    min-height: 200px !important;
+  }
+  .q-uploader--disable {
+    max-height: 36px !important;
+    min-height: 20px !important;
+  }
+  .empty_dscription {
+    font-size: 14px;
+    color: #909399;
+    margin-bottom: 0 !important;
+  }
+  .file-origin-name {
+    line-height: 2em !important;
+  }
+  .file-description {
+    .q-field--with-bottom {
+      padding-bottom: 0px !important;
+    }
+    .q-field--dense .q-field__inner {
+      padding-bottom: 0px !important;
+    }
+  }
+  .excel-upload-status-card {
+    margin-bottom: 0px !important;
+    border-radius: 4px !important;
+    .customCardbody {
+      padding-top: 0px !important;
+    }
+  }
+  .excel-upload-btn {
+    margin: 0px !important;
+    margin-right: 3px !important;
+    height: 26px !important;
+  }
+  .txtfileinfo {
+    padding-left: 0px !important;
+    word-break: break-all;
+    font-size: 12px;
+  }
+  .nofileArea {
+    height: 196px;
+    font-size: 0.95em !important;
+  }
+}
+// CExcelUpload [E]
+.thumnailUploadPhoto {
+  width: 120px !important;
+}
+
+.thumnailUpload {
+  width: 28px !important;
+  height: 28px !important;
+}

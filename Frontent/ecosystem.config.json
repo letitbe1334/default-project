@@ -1,0 +1,18 @@
+{
+  "name": "AWS_SERVER",
+  "script": "./server.js",
+  "cwd": ".",
+  "watch": true,
+  "ignore_watch": ["node_modules", "logs"],
+  "instances": 1,
+  "autorestart": true,
+  "max_memory_restart": "2G",
+  "env": {
+    "NODE_ENV": "production",
+    "BASE_URL": "/",
+    "VITE_UPLOAD_TYPE": "AWS",
+    "VITE_API_URL": "https://shms-i.andami.kr"
+  },
+  "output": "./logs/pm2/console.log",
+  "error": "./logs/pm2/consoleError.log"
+}

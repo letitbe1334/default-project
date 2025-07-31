@@ -1,0 +1,302 @@
+@use 'sass:color';
+
+$white: #fff;
+$black: #000;
+$primary: #1976d2;
+$success: #21ba45;
+$danger: #c10015;
+$info: #31ccec;
+$warning: #f2c037;
+
+$default-color: #1976d2 !default;
+$default-orange: #ff9800 !default;
+$default-text: #3e3e3f !default;
+$default-page-background: #edf1f6 !default;
+$default-green: #39b863 !default;
+$default-red: #f44336 !default;
+$default-pink: #e91e63 !default;
+$default-purple: #9c27b0 !default;
+$default-deep-orange: #ff9800 !default;
+$default-deep-purple: #673ab7 !default;
+$default-indigo: #3f51b5 !default;
+$default-blue: #2196f3 !default;
+$default-light-blue: #03a9f4 !default;
+$default-cyan: #00bcd4 !default;
+$default-light-green: #8bc34a !default;
+$default-brown: #795548 !default;
+$default-grey: #9e9e9e !default;
+$default-blue-grey: #607d8b !default;
+
+// 상단탭 메뉴 컬러
+$top-header-tabmenu-color: #003876;
+$top-header-tabmenu-bg-color: #147fd6;
+$top-header-tabmenu-active-color: #fff;
+$top-header-tabmenu-active-bg-color: #edf1f6;
+$top-header-tabmenu-inactive-color: #808080;
+
+// 사이드바 메뉴 컬러
+$sidebar-active-parent-bg-color: #1976d2;
+$sidebar-active-parent-txt-color: #fff;
+$sidebar-active-items-bg-color: #f8f8f9;
+
+// 로그인 컬러
+$login-bg-color: #edf1f6;
+$login-main-color: #1976d2;
+$login-main-color-second: color.adjust($login-main-color, $lightness: 5%, $space: hsl);
+
+// 컴포넌트 컬러
+$c-searcharea-label-color: #504f4f; //검색조건 컴포넌트 라벨색상
+$c-component-border-color: rgba(0, 0, 0, 0.24);
+$c-component-tableinner-border-color: rgba(0, 0, 0, 0.15);
+$c-component-label-color: #0072c6; // 컴포넌트 라벨 color
+$c-card-top-color: #147fd6; // 카드-상단-보더컬러
+$c-searcharea-top-color: #585958; // 검색박스-상단-보더컬러
+$c-search-area-bg-color: #e9f5fa; // 검색박스 배경색
+$popup-mini-bg-color: #7766cc;
+$popup-full-bg-color: #1976d2;
+$c-step-top-color: #ff9800; // 스텝-상단보더컬러
+$c-step-active-color: #ff9800; // 스텝-active컬러
+$c-step-msg-border-color: #ff9800;
+$c-tab-top-color: #1976d2; // 탭-상단보더컬러
+$c-tab-active-bg-color: #ffffff; // 탭-active 배경컬러
+$c-tab-inactive-bg-color: #eeeaea; // 탭-inactive 배경컬러
+$c-tab-top-blue: #1976d2;
+$c-tab-horizen-pop-main-bg-color: #1976d2; // 가로형 탭 주 배경색(팝업용)
+$c-tab-horizen-main-bg-color: #1976d2; // 가로형 탭 주 배경색
+$c-tab-vertical-main-bg-color: #1976d2; // 세로형 탭 주 배경색상
+$c-tab-page-main-bg-color: #1976d2; // 페이지내 전체탭의 경우(팝업제외)
+$c-disable-background-bg-color: #f8f9fa; // Disable시 배경 색(전체)
+
+// 테이블 컴포넌트 관련 색상
+$table-default-color: #0072c6;
+$table-default-innertop-color: #929191;
+$tableheader-color: #616161;
+$tablebody-color: #616161;
+$tableheader-backcolor: #f4f5f7; // 테이블 헤더 배경색 #eef2fd
+$table-paging-color: #1976d2; // 테이블 페이징 컬러
+$tabletop-color: #fff;
+$tabletop-title-color: #616161;
+$table-hover-color: #eef2fd;
+$table-even-color: color.adjust(#eef2fd, $lightness: 5%, $space: hsl);
+$table-border-color: rgba(0, 0, 0, 0.12);
+$table-border: 1px solid $table-border-color;
+
+// 컬러 Custom Class
+.bg-yellow-custom {
+  background-color: #fbbc05 !important;
+}
+.text-yellow-custom {
+  color: #fbbc05 !important;
+}
+.bg-gray-custom {
+  background-color: #dbd9d9 !important;
+}
+.text-gray-custom {
+  color: #dbd9d9 !important;
+}
+.bg-green-custom {
+  background-color: #b3cf0a !important;
+}
+.text-green-custom {
+  color: #b3cf0a !important;
+}
+.bg-custom-teal {
+  background-color: #009a93 !important;
+}
+.text-teal-custom {
+  color: #009a93 !important;
+}
+.bg-teal-custom {
+  background-color: #009a93 !important;
+}
+.bg-blue-custom {
+  background-color: #1976d2 !important;
+}
+.text-blue-custom {
+  color: #1976d2 !important;
+}
+.bg-navy-custom {
+  background-color: #0e306d !important;
+}
+.text-navy-custom {
+  color: #0e306d !important;
+}
+.bg-purple-custom {
+  background-color: #68127a !important;
+}
+.text-purple-custom {
+  color: #68127a !important;
+}
+.bg-purple-custom1 {
+  background-color: #7766cc !important;
+}
+.text-purple-custom1 {
+  color: #7766cc !important;
+}
+.bg-red-custom {
+  background-color: #ea002c !important;
+}
+.text-red-custom {
+  color: #ea002c !important;
+}
+.bg-orange-custom {
+  background-color: #f47725 !important;
+}
+.text-orange-custom {
+  color: #f47725 !important;
+}
+
+.btn-yellow-custom {
+  border: 1px solid #fbbc05 !important;
+  color: #fbbc05 !important;
+}
+.btn-blue-custom {
+  border: 1px solid #1976d2 !important;
+  color: #1976d2 !important;
+}
+.btn-red-custom {
+  border: 1px solid #ea002c !important;
+  color: #ea002c !important;
+}
+.btn-purple-custom1 {
+  border: 1px solid #7766cc !important;
+  color: #7766cc !important;
+}
+.btn-purple-custom {
+  border: 1px solid #68127a !important;
+  color: #68127a !important;
+}
+.btn-deep-purple-6 {
+  border: 1px solid #673ab7 !important;
+  color: #673ab7 !important;
+}
+.btn-teal-custom {
+  border: 1px solid #009a93 !important;
+  color: #009a93 !important;
+}
+.btn-blue-grey-8 {
+  border: 1px solid #455a64 !important;
+  color: #455a64 !important;
+}
+.btn-black {
+  background-color: black !important;
+  color: white !important;
+}
+.btn-blue-grey-4 {
+  border: 1px solid #90a4ae !important;
+  color: #90a4ae !important;
+}
+.btn-green-7 {
+  border: 1px solid #43a047 !important;
+  color: #43a047 !important;
+}
+.btn-blue-7 {
+  border: 1px solid #1e88e5 !important;
+  color: #1e88e5 !important;
+}
+.btn-red {
+  border: 1px solid #f44336 !important;
+  color: #f44336 !important;
+}
+// $btn-border-color: #8b8b8b;
+// $btn-font-weight: 400;
+// %BtnDefaultSet {
+//   border: 1px solid $btn-border-color !important;
+//   .q-btn__content .block {
+//     font-weight: $btn-font-weight !important;
+//   }
+// }
+// .btn-yellow-custom {
+//   @extend %BtnDefaultSet;
+//   .q-icon {
+//     color: #d8db05 !important;
+//     font-weight: 700;
+//   }
+// }
+// .btn-blue-custom {
+//   @extend %BtnDefaultSet;
+//   .q-icon {
+//     color: #1976d2 !important;
+//     font-weight: 700;
+//   }
+// }
+// .btn-red-custom {
+//   @extend %BtnDefaultSet;
+//   .q-icon {
+//     color: #ea002c !important;
+//     font-weight: 700;
+//   }
+// }
+// .btn-purple-custom1 {
+//   @extend %BtnDefaultSet;
+//   .q-icon {
+//     color: #7766cc !important;
+//     font-weight: 700;
+//   }
+// }
+// .btn-purple-custom {
+//   @extend %BtnDefaultSet;
+//   .q-icon {
+//     color: #68127a !important;
+//     font-weight: 700;
+//   }
+// }
+// .btn-deep-purple-6 {
+//   @extend %BtnDefaultSet;
+//   .q-icon {
+//     color: #673ab7 !important;
+//     font-weight: 700;
+//   }
+// }
+// .btn-teal-custom {
+//   @extend %BtnDefaultSet;
+//   .q-icon {
+//     color: #009a93 !important;
+//     font-weight: 700;
+//   }
+// }
+// .btn-blue-grey-8 {
+//   @extend %BtnDefaultSet;
+//   .q-icon {
+//     color: #455a64 !important;
+//     font-weight: 700;
+//   }
+// }
+// .btn-black {
+//   @extend %BtnDefaultSet;
+//   .q-icon {
+//     color: #000 !important;
+//     font-weight: 700;
+//   }
+// }
+// .btn-blue-grey-4 {
+//   @extend %BtnDefaultSet;
+//   .q-icon {
+//     color: #797a7a !important;
+//     font-weight: 700;
+//   }
+// }
+// .btn-green-7 {
+//   @extend %BtnDefaultSet;
+//   .q-icon {
+//     color: #43a047 !important;
+//     font-weight: 700;
+//   }
+// }
+// .btn-blue-7 {
+//   @extend %BtnDefaultSet;
+//   .q-icon {
+//     color: #1e88e5 !important;
+//     font-weight: 700;
+//   }
+// }
+// .btn-red {
+//   @extend %BtnDefaultSet;
+//   .q-icon {
+//     color: #f44336 !important;
+//     font-weight: 700;
+//   }
+// }
+.text-success {
+  color: $success;
+}

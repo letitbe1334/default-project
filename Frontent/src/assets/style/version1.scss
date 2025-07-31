@@ -1,0 +1,38 @@
+// src/assets/style/version1.scss
+
+// Styles for the top section
+.header {
+  background-color: #f8f9fa;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+// Styles for the left sidebar
+.sidebar {
+  background-color: #343a40;
+  color: white;
+  padding: 15px;
+  width: 200px;
+  float: left;
+  height: calc(100vh - 40px); // Full height minus header
+}
+
+// Styles for the content area
+.content {
+  margin-left: 220px; // Space for the sidebar
+  padding: 20px;
+  background-color: #ffffff;
+  min-height: calc(100vh - 40px); // Full height minus header
+}
+
+// Styles for the footer
+.footer {
+  background-color: #f8f9fa;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
