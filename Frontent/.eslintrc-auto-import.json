@@ -366,6 +366,8 @@
     "fileDownDecrypt": true,
     "usePlantStore": true,
     "useLoginStore": true,
-    "useServerHostStore": true
+    "useServerHostStore": true,
+    "useAuth": true,
+    "useAuthStore": true
   }
 }

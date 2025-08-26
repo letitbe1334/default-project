@@ -5,7 +5,7 @@
     :key="props.menu.name"
     :icon="props.menu.icon"
     :label="props.menu.title"
-    :class="'expmenu-lvl-' + props.menu.menuLvl"
+    :class="'expmenu-lvl-' + props.menu.menuLevel, 'testet'"
     :default-opened="isOpened"
     :model-value="isOpened"
     @click.stop="handleExpansion"
@@ -16,11 +16,11 @@
       :menu="child"
     />
   </q-expansion-item>
-  <q-card v-else>
+  <q-card v-else class="menu-card">
     <q-card-section
       v-ripple
       :class="{
-        ['expmenu-lvl-' + props.menu.menuLvl]: true,
+        ['expmenu-lvl-' + props.menu.menuLevel]: true,
         'menu-active': route.name === props.menu.name
       }"
       @click.exact="goPage(props.menu.name)"
@@ -31,6 +31,7 @@
 </template>
 <script setup lang="ts">
 import menuItem from '@layouts/menuItem.vue'
+import { menuData, usePermissionStore } from '@stores/permission'
 defineOptions({
   name: 'leftLayout'
 })
@@ -42,26 +43,26 @@ const { openMenus } = storeToRefs(permission)
 const route = useRoute()
 const router = useRouter()
 
-const props = defineProps({
-  menu: {
-    type: Object,
-    default: () => ({
+interface propType {
+  menu: menuData
+}
+
+const props = withDefaults(defineProps<propType>(), {
+  menu: () => {
+    return {
       title: '',
       icon: '',
       name: '',
-      href: '',
-      url: '',
-      header: '',
-      menuLvl: '',
-      upMenuId: '',
-      manual: false,
-      params: {},
+      path: '',
+      menuLevel: '',
+      githubOwner: '',
+      githubRepo: '',
+      githubBranch: '',
+      parentMenuId: '',
+      sortOrder: 0,
       children: []
-    })
+    }
   },
-  level: {
-    type: Number
-  }
 })
 
 // 메뉴에 자식이 있는지 확인

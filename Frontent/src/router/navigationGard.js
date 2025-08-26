@@ -1,8 +1,6 @@
 import router from '@/router'
 
-import { useLogin } from '@/composable/login'
-import { useAuth } from '@/composable/auth'
-const { getToken, haveRoute } = useAuth()
+import { useAuthStore } from '@/stores/auth'
 
 import { useAppStore } from '@stores/app'
 import { usePermissionStore } from '@stores/permission'
@@ -11,9 +9,12 @@ import { useUserStore } from '@stores/user'
 /** 인증처리가 되지 않더라도 보낼 수 있는 uri */
 const whiteList = ['/login', '/404']
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   /** app 호출 */
   const app = useAppStore()
+  
+  const auth = useAuthStore()
+  const { isLogin, accessToken } = storeToRefs(auth)
 
   /** permission 호출 */
   const permission = usePermissionStore()
@@ -23,9 +24,6 @@ router.beforeEach((to, from, next) => {
   const userStore = useUserStore()
   const { user } = storeToRefs(userStore)
 
-  /** login 호출 */
-  const login = useLogin()
-
   /** 메뉴 이동시 전체화면 로딩 처리 */
   app.setLoading()
 
@@ -34,48 +32,25 @@ router.beforeEach((to, from, next) => {
   } else {
     /** access router에 저장 되지 않은 메뉴 정보일 경우 404 페이지로 redirect */
     if (addRouters.value && addRouters.value.length > 0) {
-      if (!haveRoute(addRouters.value, to.path)) {
+      if (!auth.haveRoute(addRouters.value, to.path)) {
         return next({
           path: '/404'
         })
       }
     }
-    /**
-     * 메뉴 이동전에 uri 정보를 loaclStorage에 저장
-     *
-     * 인증토큰이 만료 되었을 시에 로그인창을 띄우게 되며
-     * 로그인 처리가 끝나고 나면 localStorage에 저장한 uri 정보를 바탕으로 사용자가 가고자한 페이지로 이동하게 함
-     */
-    window.localStorage.setItem('checkToPath', to.path)
 
     /** 인증토큰 여부 파악 */
-    const isToken = getToken()
-    if (isToken && isToken !== 'undefined') {
+    const isSuccess = !isLogin.value ? await auth.getNewToken() : true
+    if (isSuccess) {
       /** 메뉴 이동 로그, 해당 소스에서 구현 X */
 
       /** 인증토큰이 있음에도 로그인페이지로 이동하고자 할 경우 메인페이지로 이동시킴 */
       if (to.path === '/login') {
         next({
-          path: user.value.url
+          path: '/'
         })
       } else {
-        /** Access token 유효성 체크 */
-        login
-          .ValidCheckToken()
-          .then(() => {
-            next()
-          })
-          .catch(() => {
-            /** Refresh token를 통해 Access token 갱신 */
-            login
-              .UpdateTokenByRefreshToken()
-              .then(() => {
-                next()
-              })
-              .catch(() => {
-                clear(next)
-              })
-          })
+        next()
       }
     } else {
       /** token X */
@@ -101,10 +76,3 @@ router.afterEach((to) => {
   app.setLoading(false)
 })
 
-function clear(next) {
-  /** logout 처리 */
-  const login = useLogin()
-  login.LogOut().finally(() => {
-    next('/login')
-  })
-}

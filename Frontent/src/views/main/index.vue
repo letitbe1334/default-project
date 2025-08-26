@@ -88,6 +88,15 @@ function init() {
   // url setting
   // code setting
   // list setting
+  check()
+}
+function check() {
+  $http({
+    url: '/api/auth/check',
+    method: 'get',
+  }).then((_result: any) => {
+    console.log(_result)
+  })
 }
 /******************************
  * @Provide_선언

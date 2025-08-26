@@ -7,7 +7,7 @@
           self="top middle"
           auto-close
           transition-show="jump-down"
-          transition-hide="jump-up"
+        transition-hide="jump-up"
           class="top-menu-layer"
         >
           <q-list class="header-change-lang">
@@ -93,16 +93,13 @@ const LangItems = computed(() => {
       icon: 'tw',
       code: 'zh_tw',
       codeName: 'Chinise(TW)'
-    }
-  ]
-  if (user.value.userId === 'U000000001') {
-    // 특수 계정만 표시
-    items.push({
+    },
+    {
       icon: 'autorenew',
       code: 'generator',
       codeName: 'JSON 업데이트'
-    })
-  }
+    }
+  ]
   return items
 })
 
@@ -111,7 +108,7 @@ onBeforeMount(() => {
 })
 
 function init() {
-  generatorUrl.value = selectConfig.system.genJson.url
+  generatorUrl.value = selectConfig.language.generatorJson.url
   lang.value = Cookies.get('language') ? Cookies.get('language') : 'kr'
   setClass()
 }

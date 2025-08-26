@@ -458,8 +458,9 @@ import { encrypt, fileDownDecrypt } from '@utils/aes256'
 
 import { useUserStore } from '@stores/user'
 
-import { useAuth } from '@/composable/auth'
-const { getAccessToken } = useAuth()
+import { useAuthStore } from '@/stores/auth'
+const auth = useAuthStore()
+const { accessToken } = storeToRefs(auth)
 
 /******************************
  * @컴포넌트_옵션_선언
@@ -657,7 +658,7 @@ const $q = useQuasar()
 const url = computed(
   () => import.meta.env.VITE_API_URL + transactionConfig.com.upload.uploading.url
 )
-const headers = computed(() => [{ name: 'X-Authorization', value: String(getAccessToken()) }])
+const headers = computed(() => [{ name: 'Authorization', value: accessToken.value }, { name: 'withCredentials', value: 'true' }])
 const formFields = computed(() => {
   const data = [
     {

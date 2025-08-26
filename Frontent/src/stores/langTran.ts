@@ -2,8 +2,7 @@ import { useQuery } from '@tanstack/vue-query'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
-import { useAuth } from '@/composable/auth'
-const { getAccessToken } = useAuth()
+import { useAuthStore } from '@/stores/auth'
 
 import {
   krLanguageMap, // 한국어
@@ -23,10 +22,13 @@ interface langJson {
 }
 
 const fetchLangs = async (): Promise<langJson[]> => {
+  const auth = useAuthStore()
+  const { accessToken } = storeToRefs(auth)
   const response = await axios.get<langJson[]>(getLanguageJsonApi(), {
     headers: {
       'Cache-Control': 'no-cache',
-      'X-Authorization': getAccessToken()
+      'Authorization': accessToken.value,
+      withCredentials: true,
     },
     baseURL: import.meta.env.VITE_API_URL
   })
@@ -34,6 +36,9 @@ const fetchLangs = async (): Promise<langJson[]> => {
 }
 
 export const useLangTranStore = defineStore('langTran', () => {
+  const auth = useAuthStore()
+  const { accessToken } = storeToRefs(auth)
+  
   const langs = ref<langJson[]>([])
 
   /** vue-query 정보 */
@@ -47,7 +52,7 @@ export const useLangTranStore = defineStore('langTran', () => {
     staleTime: 3 * 60 * 60 * 1000, // 3시간 동안 fresh 상태 유지
     refetchOnWindowFocus: true, // 사용자가 다시 창을 보면 자동 새로고침
     refetchOnReconnect: true, // 인터넷 연결이 다시 되면 자동 새로고침
-    enabled: !!getAccessToken()
+    enabled: !!accessToken.value
   })
 
   watchEffect(() => {
@@ -91,7 +96,7 @@ export const useLangTranStore = defineStore('langTran', () => {
   langVueQuery.value.isStale = langQuery.isStale.value
   const refetchLang = () => langQuery.refetch()
 
-  function GetNonAuthLangInfo(data: langData) {
+  function GetNonAuthLangInfo(data: langData): Promise<boolean> {
     return new Promise((resolve, reject) => {
       const lang = data.lang ? data.lang : 'kr'
       let langs: any = []
@@ -120,7 +125,7 @@ export const useLangTranStore = defineStore('langTran', () => {
       if (langs) {
         resolve(true)
       } else {
-        reject()
+        reject(false)
       }
     })
   }

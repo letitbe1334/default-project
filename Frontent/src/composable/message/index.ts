@@ -18,9 +18,7 @@ import {
  * @param
  * @returns alert, confirm, requestSuccess, requestError, exceptionNotify, validError 함수
  */
-export function useMessage() {
-  const $language = inject('$language') as GetTranLanguageFunction
-
+export function useMessage() {  
   const Toast = swal.mixin({
     toast: true,
     position: 'bottom-end',
@@ -54,7 +52,7 @@ export function useMessage() {
       if (!_option) {
         _option = {
           title: '안내',
-          message: $language('관리자에게 문의바랍니다.'),
+          message: getLanguage('관리자에게 문의바랍니다.'),
           type: 'error'
         }
       }
@@ -62,7 +60,7 @@ export function useMessage() {
         // 운영 서버인 경우에는
         // [''] ** 현재는 notify를 exception발생하였을 경우에만 사용함으로 이후에 notify를 추가로 사용하는 경우 default문구 생성
         // 라는 문구의 메시지가 뜨도록 설정
-        _option.message = $language('관리자에게 문의바랍니다.')
+        _option.message = getLanguage('관리자에게 문의바랍니다.')
       }
       toastr.options.closeButton = true
       toastr.options.progressBar = true
@@ -87,8 +85,8 @@ export function useMessage() {
 
       if (_option.message === 'Network Error') {
         this.alert({
-          title: $language('네트워크 접속오류'),
-          message: $language(
+          title: getLanguage('네트워크 접속오류'),
+          message: getLanguage(
             '네트워크 접속문제로 요청된 정보를 찾을 수 없습니다.\n관리자에게 문의해 주시기 바랍니다.'
           ),
           type: 'error'
@@ -98,28 +96,20 @@ export function useMessage() {
       if (_option && _option.message) {
         _errMsg = '<table class="table table-bordered"><tbody>'
         _errMsg +=
-          '<tr><th scope="row" class="q-pa-sm">Status</th><td colspan="3">' +
-          _option.errorDetail?.status +
+          '<tr><th scope="row" class="q-pa-sm">httpStatus</th><td colspan="3">' +
+          _option.errorDetail?.httpStatus +
           '</td>'
+        _errMsg +=
+          '<tr><th scope="row" class="q-pa-sm">timestamp</th><td colspan="3">' +
+          _option.errorDetail?.timestamp +
+          '</td></tr>'
         _errMsg +=
           '<tr><th scope="row" class="q-pa-sm">Message</th><td colspan="3">' +
           _option.message +
           '</td></tr>'
         _errMsg +=
-          '<tr><th scope="row" class="q-pa-sm">Cause</th><td colspan="3">' +
-          _option.errorDetail?.cause +
-          '</td></tr>'
-        _errMsg +=
-          '<tr><th scope="row" class="q-pa-sm">CauseDetail</th><td colspan="3">' +
-          _option.errorDetail?.causeDetail +
-          '</td></tr>'
-        _errMsg +=
-          '<tr><th scope="row" class="q-pa-sm">Url</th><td colspan="3">' +
-          (_option.errorDetail?.url
-            ? _option.errorDetail?.url
-            : _option.errorDetail?.config
-              ? '[' + _option.errorDetail.config.method + '] ' + _option.errorDetail.config.url
-              : '') +
+          '<tr><th scope="row" class="q-pa-sm">path</th><td colspan="3">' +
+          _option.errorDetail?.path +
           '</td></tr>'
         _errMsg += '</tbody></table>'
       } else {
@@ -127,7 +117,7 @@ export function useMessage() {
       }
 
       this.notify({
-        title: $language(_option.title),
+        title: getLanguage(_option.title),
         message: _errMsg,
         type: _option.type,
         duration: _option.duration ? _option.duration : 3000
@@ -145,17 +135,17 @@ export function useMessage() {
     alert: function (_option: toastrOptionData): void {
       if (_option.type === 'success') {
         Toast.fire({
-          title: $language('안내'), // Alert의 경우 '안내' title을 사용
-          html: convertEnter($language(_option.message)),
+          title: getLanguage('안내'), // Alert의 경우 '안내' title을 사용
+          html: convertEnter(getLanguage(_option.message)),
           icon: _option.type,
-          confirmButtonText: _option.buttonLabel ? _option.buttonLabel : $language('확인') // 확인
+          confirmButtonText: _option.buttonLabel ? _option.buttonLabel : getLanguage('확인') // 확인
         })
       } else {
         Alert.fire({
-          title: $language(_option.title),
-          html: convertEnter($language(_option.message)),
+          title: getLanguage(_option.title),
+          html: convertEnter(getLanguage(_option.message)),
           icon: _option.type,
-          confirmButtonText: _option.buttonLabel ? _option.buttonLabel : $language('확인') // 확인
+          confirmButtonText: _option.buttonLabel ? _option.buttonLabel : getLanguage('확인') // 확인
         })
       }
     },
@@ -172,12 +162,12 @@ export function useMessage() {
      */
     confirm: function (_option: toastrOptionData): void {
       Alert.fire({
-        title: $language(_option.title),
-        html: convertEnter($language(_option.message)),
+        title: getLanguage(_option.title),
+        html: convertEnter(getLanguage(_option.message)),
         icon: 'question',
-        confirmButtonText: $language('적용'), // 적용
+        confirmButtonText: getLanguage('적용'), // 적용
         showCancelButton: true,
-        cancelButtonText: $language('취소'), // 취소
+        cancelButtonText: getLanguage('취소'), // 취소
         cancelButtonColor: '#EEEEEE'
       }).then((_result) => {
         if (_result.isConfirmed) {
@@ -205,7 +195,7 @@ export function useMessage() {
 
   const alert: AlertFunction = (option: alertOptionData) => {
     commMessage.alert({
-      title: option.title || $language('안내'),
+      title: option.title || getLanguage('안내'),
       message: option.message,
       type: option.type || 'info',
       buttonLabel: option.buttonLabel
@@ -216,7 +206,7 @@ export function useMessage() {
   }
   const requestSuccess: RequestSuccessFunction = (_message?: string) => {
     alert({
-      message: _message ? $language(_message) : $language('정상적으로 처리되었습니다.'), // '정상적으로 처리되었습니다.'
+      message: _message ? getLanguage(_message) : getLanguage('정상적으로 처리되었습니다.'), // '정상적으로 처리되었습니다.'
       type: 'success'
     })
   }
@@ -227,7 +217,7 @@ export function useMessage() {
       : true
     if (_bol) {
       alert({
-        title: $language('에러'),
+        title: getLanguage('에러'),
         message: message,
         type: 'error',
         buttonLabel: 'OK'
@@ -239,7 +229,7 @@ export function useMessage() {
   }
   const validError: ValidErrorFunction = () => {
     alert({
-      title: $language('필수항목 미입력'),
+      title: getLanguage('필수항목 미입력'),
       message: '', // _message ? _message : '유효성 검사 중 오류가 발생했습니다. \n재시도 후 지속적인 문제 발생 시 관리자에게 문의하세요.',
       type: 'error',
       buttonLabel: 'OK'

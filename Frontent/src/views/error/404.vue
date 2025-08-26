@@ -104,8 +104,6 @@ defineOptions({
 /** userStore 호출 */
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
-/** langTran 호출 */
-const langTran = useLangTranStore()
 
 const mainUrl = ref('')
 
@@ -114,22 +112,9 @@ onMounted(() => {
 })
 
 function init() {
-  getLangInfo()
   mainUrl.value = user.value.url!
 }
 
-function getLangInfo() {
-  return new Promise((_resolve, _reject) => {
-    langTran
-      .GetNonAuthLangInfo({ lang: Cookies.get('language') })
-      .then((hasLang) => {
-        _resolve(hasLang)
-      })
-      .catch(() => {
-        _reject()
-      })
-  })
-}
 </script>
 <style lang="sass">
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans')

@@ -2,106 +2,59 @@ import { useQuery } from '@tanstack/vue-query'
 import axios from 'axios'
 
 import { useLogin } from '@/composable/login'
-import { useAuth } from '@/composable/auth'
-const { getAccessToken, getToken } = useAuth()
+import { useAuthStore } from '@/stores/auth'
 
-interface fetchUserType {
-  auths: Array<string> | null
-  user: userType
-  depts: Array<any>
-  users: Array<any>
-  vendors: Array<any>
-}
-
-const fetchUser = async (): Promise<fetchUserType> => {
-  const response = await axios.get<fetchUserType>(selectConfig.auth.userInfo.url, {
+const fetchUser = async (): Promise<userType> => {
+  const auth = useAuthStore()
+  const { accessToken } = storeToRefs(auth)
+  const response = await axios.get<userType>(selectConfig.auth.member.url, {
     headers: {
       'Cache-Control': 'no-cache',
-      'X-Authorization': getAccessToken()
+      'Authorization': accessToken.value,
+      withCredentials: true,
     },
     baseURL: import.meta.env.VITE_API_URL,
-    params: {
-      deviceTypeCd: 'P'
-    }
   })
-  return response.data
+  return response.data.data
 }
 
 export const useUserStore = defineStore('user', () => {
   const { LogOut } = useLogin()
+  const auth = useAuthStore()
+  const { accessToken } = storeToRefs(auth)
+  
   const user = ref<userType>({
-    id: '',
-    jobCd: '',
-    jobName: '',
-    loginId: '',
-    loginPwd: '',
-    mobileNo: '',
-    oripassword: '',
-    password: '',
-    deptCd: '',
-    deptName: '',
+    memberId: '',
     email: '',
-    empNo: '',
-    enterDate: '',
-    birthDate: '',
-    plantCd: '',
-    plantCds: '',
-    plantName: '',
-    recommendationFlag: '',
-    remark: '',
-    retireDate: '',
-    retireFlag: '',
-    seniorName: '',
-    seniorityName: '',
-    sexCd: '',
-    sexName: '',
-    spotCd: '',
-    spotName: '',
-    typeName: '',
-    userId: '',
-    userName: '',
-    menuNm: '',
-    dashboardId: '',
-    approveSignature: '',
-    url: '',
-    checkupBatchCycleCd: '',
-    checkupComeDate: '',
-    checkupCycleCd: '',
-    checkupOccCycleCd: '',
-    checkupRecentDate: '',
-    checkupScheduleDate: '',
-    checkupStatus: '',
-    defectManageFlag: '',
-    hazardNames: ''
+    nickname: '',
+    authorities: [],
   })
   const auths = ref<Array<string> | null>([])
-  const depts = ref([])
-  const vendors = ref([])
-  const roles = ref([])
   /** vue-query 정보 */
   const userVueQuery = ref({
     isStale: true,
     isFetching: true,
     refetch: null as (() => void) | null
   })
+  
+  const hasToken = computed(() => !!accessToken.value);
   const userQuery = useQuery({
-    queryKey: ['userInfo'],
+    queryKey: ['userInfo', accessToken],
     queryFn: fetchUser,
     staleTime: 3 * 60 * 60 * 1000, // 3시간 동안 fresh 상태 유지
     refetchOnWindowFocus: true, // 사용자가 다시 창을 보면 자동 새로고침
     refetchOnReconnect: true, // 인터넷 연결이 다시 되면 자동 새로고침
-    enabled: !!getAccessToken()
-    // enabled: !!user.value && !!user.value.userId
+    enabled: hasToken
   })
 
   watchEffect(() => {
     if (userQuery.isSuccess.value) {
-      if (!userQuery.data.value || userQuery.data.value?.user?.userId !== getToken()) {
+      if (!userQuery.data.value) { //  || userQuery.data.value?.user?.userId !== getToken()
         LogOut().finally(() => window.location.reload())
       }
 
-      auths.value = userQuery.data.value!.auths
-      user.value = userQuery.data.value!.user
+      user.value = userQuery.data.value
+      auths.value = userQuery.data.value.authorities
       userVueQuery.value.isStale = false // fresh한 상태로 변경
     }
   })
@@ -120,9 +73,6 @@ export const useUserStore = defineStore('user', () => {
     user,
     userVueQuery,
     auths,
-    depts,
-    vendors,
-    roles,
     /** actions */
     refetchUser: () => userVueQuery.value.refetch && userVueQuery.value.refetch()
   }

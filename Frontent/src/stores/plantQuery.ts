@@ -1,14 +1,16 @@
 import { useQuery } from '@tanstack/vue-query'
 import axios from 'axios'
 
-import { useAuth } from '@/composable/auth'
-const { getAccessToken } = useAuth()
+import { useAuthStore } from '@/stores/auth'
 
 const fetchPlants = async (): Promise<codeMasterType[]> => {
+  const auth = useAuthStore()
+  const { accessToken } = storeToRefs(auth)
   const defaultConfig = {
     headers: {
       'Cache-Control': 'no-cache',
-      'X-Authorization': getAccessToken()
+      'Authorization': accessToken.value,
+      withCredentials: true,
     },
     baseURL: import.meta.env.VITE_API_URL,
     data: {}

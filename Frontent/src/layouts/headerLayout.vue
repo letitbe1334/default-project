@@ -1,7 +1,7 @@
 <template>
   <q-header class="layout-header">
     <q-toolbar>
-      <q-toolbar-title @click="goPage('/')"><img src="@images/logo.png" /></q-toolbar-title>
+      <q-toolbar-title @click="goPage('/')"><img width="200px" height="45px" src="@images/logo.png" /></q-toolbar-title>
       <q-btn flat dense :icon="props.menuIcon" aria-label="Menu" @click="toggleLeftDrawer" />
       <tab-menus />
       <div class="header-right-menu">
@@ -19,7 +19,6 @@
         </div>
         <user-info />
         <allim />
-        <plant-menu />
         <change-lanuage />
         <menu-search />
         <site-map />
@@ -33,7 +32,6 @@ import allim from '@layouts/header/allim.vue'
 import siteMap from '@layouts/header/siteMap.vue'
 import menuSearch from '@layouts/header/menuSearch.vue'
 import changeLanuage from '@layouts/header/changeLanuage.vue'
-import plantMenu from '@layouts/header/plantMenu.vue'
 import userInfo from '@layouts/header/userInfo.vue'
 const router = useRouter()
 defineOptions({

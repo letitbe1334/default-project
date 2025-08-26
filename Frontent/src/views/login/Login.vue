@@ -7,8 +7,7 @@
             <div class="wrap d-md-flex">
               <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
                 <div class="text w-100 anivertilogo">
-                  <h2>Andami – SHMS</h2>
-                  <p>(PSM Based Safety and Health Management System)</p>
+                  <h2>DEOH - default project</h2>
                 </div>
               </div>
               <div class="login-wrap p-4 p-lg-5">
@@ -21,15 +20,14 @@
                 <q-form @submit="onSubmit" class="signin-form">
                   <div class="form-group mb-3">
                     <q-input
-                      ref="userIdInput"
                       class="loginText"
                       rounded
                       outlined
                       color="login-main-color"
                       filled
-                      v-model="loginForm.userId"
+                      v-model="loginForm.email"
                       placeholder="ID"
-                      name="userId"
+                      name="email"
                       required
                     >
                       <template v-slot:prepend>
@@ -38,7 +36,7 @@
                       <template v-slot:append>
                         <q-icon
                           name="close"
-                          @click="loginForm.userId = ''"
+                          @click="loginForm.email = ''"
                           class="cursor-pointer"
                         />
                       </template>
@@ -70,6 +68,31 @@
                       </template>
                     </q-input>
                   </div>
+                  <div class="form-group mb-3">
+                    <q-input
+                      class="loginText"
+                      type="text"
+                      rounded
+                      outlined
+                      color="login-main-color"
+                      filled
+                      v-model="loginForm.nickname"
+                      placeholder="닉네임"
+                      autoComplete="on"
+                      name="nickname"
+                    >
+                      <template v-slot:prepend>
+                        <q-icon name="badge" />
+                      </template>
+                      <template v-slot:append>
+                        <q-icon
+                          name="close"
+                          @click="loginForm.nickname = ''"
+                          class="cursor-pointer"
+                        />
+                      </template>
+                    </q-input>
+                  </div>
                   <div class="form-group">
                     <q-btn
                       :loading="loading"
@@ -86,11 +109,21 @@
                         Sign In...
                       </template>
                     </q-btn>
+                    <q-btn
+                      rounded
+                      size="lg"
+                      icon="lock_open"
+                      color="login-main-color"
+                      style="width: 100%"
+                      v-on:click="register"
+                    >
+                      회원가입
+                    </q-btn>
                   </div>
                   <div class="form-group d-md-flex">
                     <div class="w-50 text-left">
                       <label class="checkbox-wrap checkbox-primary mb-0">
-                        Remember User ID
+                        Remember Email
                         <input type="checkbox" v-model="rememberMe" />
                       </label>
                     </div>
@@ -150,17 +183,14 @@ defineOptions({
   name: 'Login'
 })
 
-const route = useRoute()
 const router = useRouter()
 
 /** message 호출 */
 const { alert } = useMessage()
-/** langTran 호출 */
-const langTran = useLangTranStore()
 /** login 호출 */
-const { LoginByUserAccount, LogOut } = useLogin()
+const { LoginByUserAccount } = useLogin()
 
-// const cookies = inject('$cookies')
+const lang = ref('')
 const selectedCountry = ref('')
 const LangItems = reactive([
   {
@@ -194,15 +224,14 @@ const LangItems = reactive([
     class: ''
   }
 ])
-const connIp = ref('')
 const rememberMe = ref(false)
 const isPwd = ref(true)
 const loginForm = reactive({
-  userId: '',
-  password: ''
+  email: '',
+  password: '',
+  nickname: ''
 })
 const loading = ref(false)
-const redirect = ref<string | null>(null)
 const popupOptions = ref<popupParamType>({
   target: null,
   title: '',
@@ -212,17 +241,10 @@ const popupOptions = ref<popupParamType>({
   param: {},
   closeCallback: null
 })
-const lang = ref('')
-
-watch(
-  route,
-  () => {
-    redirect.value = String(route.query?.redirect)
-  },
-  { immediate: true }
-)
+const signupUrl = ref('')
 
 onBeforeMount(() => {
+  console.log('login')
   lang.value = Cookies.get('language') || 'kr'
 
   _.forEach(LangItems, (_item) => {
@@ -230,30 +252,17 @@ onBeforeMount(() => {
       selectedCountry.value = _item.codeName
     }
   })
-
-  // orderedPromise([
-  //   { func: getLangInfo, param: 'login' },
-  //   { func: getLangInfo, param: 'common' }
-  // ])
   setClass()
-})
-
-onMounted(() => {
-  $http({
-    url: 'https://ipinfo.io/json',
-    method: 'GET'
-  }).then((_result: any) => {
-    connIp.value = _result.data.ip
-  })
   init()
 })
 
 function init() {
   const rememberLoginId = window.localStorage.getItem('rememberLoginId')
   if (rememberLoginId !== null) {
-    loginForm.userId = decrypt(rememberLoginId)
+    loginForm.email = decrypt(rememberLoginId)
     rememberMe.value = true
   }
+  signupUrl.value = transactionConfig.auth.login.signup.url
 }
 
 function onSubmit() {
@@ -261,14 +270,13 @@ function onSubmit() {
   orderedPromise([
     // { func: checkValid, exceptionMessage: 'M0000000001' }, /** id, pwd 입력여부 */
     { func: actionLogin } /** login api 호출 */,
-    { func: getLangInfo } /** 언어별 라벨, 메시지 정보 get */
   ])
 }
 
 function actionLogin() {
   return new Promise((_resolve, _reject) => {
     if (rememberMe.value === true) {
-      window.localStorage.setItem('rememberLoginId', encrypt(loginForm.userId))
+      window.localStorage.setItem('rememberLoginId', encrypt(loginForm.email))
     } else {
       window.localStorage.removeItem('rememberLoginId')
     }
@@ -276,34 +284,21 @@ function actionLogin() {
     loading.value = true
 
     LoginByUserAccount({
-        userId: loginForm.userId,
-        password: encrypt(loginForm.password),
-        connIp: connIp.value
+        email: loginForm.email,
+        password: loginForm.password
+        // password: encrypt(loginForm.password)
       })
       .then(() => {
+        loginPageMove()
+        loading.value = false
         _resolve(true)
       })
       .catch((error) => {
-        if (error && error.response.data.returnCode === 'INIT_PASSWORD') {
-          changePassword(loginForm.userId)
-          _resolve(false)
-        } else if (error && error.response.data.returnCode === 'PASS_PASSWORD') {
-          changePassword(error.response.data.message)
-          _resolve(false)
-        } else if (error && error.response.data.returnCode === 'UNDER_CONSTRUCTION') {
-          // 개발서버 접속 못하게 설정하였을 경우
-          alert({
-            title: '알림',
-            message: error.response.data.message,
-            type: 'info'
-          })
-        } else {
-          alert({
-            title: '에러',
-            message: error.response.data.message,
-            type: 'error'
-          })
-        }
+        alert({
+          title: '에러',
+          message: error.message,
+          type: 'error'
+        })
         loading.value = false
         _reject(error)
       })
@@ -313,59 +308,15 @@ function actionLogin() {
 function loginPageMove() {
   router
     .push({
-      path:
-        redirect.value === 'undefined' || redirect.value === undefined
-          ? '/'
-          : redirect.value || '/login'
+      path: '/'
     })
     .catch(() => {})
-}
-
-function getLangInfo() {
-  return new Promise((_resolve, _reject) => {
-    langTran
-      .GetNonAuthLangInfo({ lang: Cookies.get('language') })
-      .then((hasLang) => {
-        if (hasLang) {
-          loginPageMove()
-        }
-        loading.value = false
-        _resolve(hasLang)
-      })
-      .catch((error) => {
-        if (error && error.message === 'Network Error') {
-          alert({
-            title: error.message,
-            message: '서버에 연결할 수 없습니다. 관리자에게 문의바랍니다.',
-            type: 'info',
-            buttonLabel: '확인'
-          })
-        } else {
-          alert({
-            title: '로그인 에러',
-            message: '로그인 진행중 에러가 발생하였습니다. 관리자에게 문의바랍니다.',
-            type: 'info',
-            buttonLabel: '확인'
-          })
-          LogOut()
-            .then(() => {
-              loginPageMove()
-            })
-            .catch(() => {
-              loginPageMove()
-            })
-
-          loading.value = false
-        }
-        _reject()
-      })
-  })
 }
 
 function changePassword(message: string) {
   popupOptions.value.title = '비밀번호 변경 안내'
   popupOptions.value.param = {
-    loginId: loginForm.userId,
+    loginId: loginForm.email,
     message: message
   }
   popupOptions.value.visible = true
@@ -397,6 +348,16 @@ function setClass() {
     if (lang.value == _item.code) {
       _item.class = 'activeLanuage'
     }
+  })
+}
+
+function register() {
+  $http({
+    url: signupUrl.value,
+    method: 'POST',
+    data: loginForm
+  }).then((_result: any) => {
+    console.log(_result)
   })
 }
 </script>

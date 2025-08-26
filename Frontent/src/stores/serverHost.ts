@@ -1,14 +1,16 @@
 import axios from 'axios'
 import { useQuery } from '@tanstack/vue-query'
 
-import { useAuth } from '@/composable/auth'
-const { getAccessToken } = useAuth()
+import { useAuthStore } from '@/stores/auth'
 
 const fetchServerHost = async (): Promise<string> => {
+  const auth = useAuthStore()
+  const { accessToken } = storeToRefs(auth)
   const response = await axios.get<string>(selectConfig.com.mobileHostname.url, {
     headers: {
       'Cache-Control': 'no-cache',
-      'X-Authorization': getAccessToken()
+      'Authorization': accessToken.value,
+      withCredentials: true,
     },
     baseURL: import.meta.env.VITE_API_URL
   })
@@ -16,6 +18,9 @@ const fetchServerHost = async (): Promise<string> => {
 }
 
 export const useServerHostStore = defineStore('serverHost', () => {
+  const auth = useAuthStore()
+  const { accessToken } = storeToRefs(auth)
+  
   const serverUrl = ref('localhost')
 
   const isFetching = ref(false)
@@ -28,7 +33,7 @@ export const useServerHostStore = defineStore('serverHost', () => {
     staleTime: 12 * 60 * 60 * 1000, // 12시간 동안 fresh 상태 유지
     refetchOnWindowFocus: true, // 사용자가 다시 창을 보면 자동 새로고침
     refetchOnReconnect: true, // 인터넷 연결이 다시 되면 자동 새로고침
-    enabled: !!getAccessToken()
+    enabled: !!accessToken.value
   })
 
   watchEffect(() => {

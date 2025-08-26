@@ -39,6 +39,14 @@
         }
       }
     }
+    & .menu-card {
+      border-top: 1px solid #eee; /* 옅은 회색 실선 */ 
+      box-shadow: none;
+      border-radius: 0;
+      & .expmenu-lvl-0 {
+        padding: 9px 10px !important
+      }
+    }
     & .menu-active {
       background: linear-gradient(
         -72.47deg,
@@ -52,6 +60,7 @@
     }
     // 최상위 레벨 메뉴
     & .expmenu-lvl-0 {
+      border-top: 1px solid #eee; /* 옅은 회색 실선 */
       & > .q-expansion-item__container {
         & > .q-item {
           min-height: 40px;

@@ -2,52 +2,49 @@
 import { useQuery } from '@tanstack/vue-query'
 import axios from 'axios'
 
-import { useAuth } from '@/composable/auth'
-const { getAccessToken } = useAuth()
 import { asyncRouterMap, addAuthRouter } from '@/router'
 
+import { useAuthStore } from '@/stores/auth'
+
 interface urlData {
-  url: string
-  paramUrl: string
+  path: string
+  paramPath: string
   params: Record<string, string>
 }
 
 interface menuApiData {
   /** api info */
-  sysMenuId?: string
-  upMenuId: string
+  menuId?: string
+  parentMenuId: string
   sortOrder: number
+  githubOwner: string
+  githubRepo: string
+  githubBranch: string
 }
 
 interface responseMenuData extends menuApiData {
   /** use menu info */
   title: string | undefined
-  menuNm: string
-  menuIcon: stringNull
+  menuName: string
+  icon: stringNull
   manualFlag: string
-  userWriteFlag: string
-  menuViewMethod: stringNull
-  icon: string
   name: string
-  href: string
-  url: string
-  header?: string
-  menuLvl: string
-  manual: boolean
+  path: string
+  menuLevel: string
+  githubOwner: string
+  githubRepo: string
+  githubBranch: string
   params?: Record<string, string>
   children?: Array<menuData>
 }
 
-interface menuData extends menuApiData {
+export interface menuData extends menuApiData {
   /** use menu info */
   title: string | undefined
   icon: string
   name: string
-  href: string
-  url: string
-  header?: string
-  menuLvl: string
-  manual: boolean
+  path: string
+  menuLevel: string
   params?: Record<string, string>
   children?: Array<menuData>
 }
@@ -56,21 +53,20 @@ interface accessMenu extends menuApiData {
   /** use menu info */
   title: string
   name: string
-  href: string
-  url: string
-  menuLvl: string
-  menuViewMethod: string
-  manual: boolean
+  path: string
+  menuLevel: string
   editable: boolean
   params?: Record<string, string>
 }
 
 interface metaData {
   title: string | undefined
-  manual: boolean
   editable: boolean
   params?: Record<string, string>
   layout?: stringNull
+  githubOwner?: string
+  githubRepo?: string
+  githubBranch?: string
 }
 
 export interface accessRouterData {
@@ -81,25 +77,30 @@ export interface accessRouterData {
   children?: accessRouterData[]
 }
 
-const fetchMenus = async (empNo: string): Promise<Array<responseMenuData>> => {
-  const response = await axios.get<userType>(selectConfig.sys.userMenu.get.url + empNo, {
+const fetchMenus = async (memberId: number): Promise<Array<responseMenuData>> => {
+  const auth = useAuthStore()
+  const { accessToken } = storeToRefs(auth)
+  const response = await axios.get<userType>(selectConfig.auth.menu.list.url, {
     headers: {
       'Cache-Control': 'no-cache',
-      'X-Authorization': getAccessToken()
+      'Authorization': accessToken.value,
+      withCredentials: true,
     },
     baseURL: import.meta.env.VITE_API_URL,
     params: {
-      lang: getLang(),
-      deviceTypeCd: 'P'
+      memberId: memberId
     }
   })
-  return response.data
+  return response.data.data
 }
 
 export const usePermissionStore = defineStore('permission', () => {
   /** userStore 호출 */
   const userStore = useUserStore()
   const { user } = storeToRefs(userStore)
+  
+  const auth = useAuthStore()
+  const { accessToken } = storeToRefs(auth)
 
   const route = useRoute()
   const router = useRouter()
@@ -117,15 +118,15 @@ export const usePermissionStore = defineStore('permission', () => {
   })
   const menuQuery = useQuery({
     queryKey: ['authMenus'],
-    queryFn: () => fetchMenus(user.value.empNo),
+    queryFn: () => fetchMenus(user.value.memberId),
     staleTime: 3 * 60 * 60 * 1000, // 3시간 동안 fresh 상태 유지
     refetchOnWindowFocus: true, // 사용자가 다시 창을 보면 자동 새로고침
     refetchOnReconnect: true, // 인터넷 연결이 다시 되면 자동 새로고침
-    enabled: !!getAccessToken() && !!user.value.empNo
+    enabled: !!accessToken.value && !!user.value.memberId
   })
 
   watchEffect(() => {
-    if (user.value.empNo && menuVueQuery.value.refetch) {
+    if (user.value.memberId && menuVueQuery.value.refetch) {
       menuVueQuery.value.refetch()
     }
   })
@@ -137,19 +138,19 @@ export const usePermissionStore = defineStore('permission', () => {
 
       /** 화면 표시 메뉴 셋팅 */
       const menus: menuData[] = _.map(menuQuery.data.value!, (item) => {
-        const urlInfo = getUrlData(item.url)
+        const pathInfo = getPathData(item.path)
         return {
-          title: item.menuNm,
-          icon: item.menuIcon,
-          name: item.sysMenuId!,
-          href: urlInfo.url ? `${urlInfo.url}${urlInfo.paramUrl}` : '',
-          url: urlInfo.url,
-          header: '',
-          menuLvl: item.menuLvl,
-          manual: item.manualFlag === 'Y' ? true : false,
-          params: urlInfo.params,
+          title: item.menuName,
+          icon: item.icon,
+          name: String(item.menuId)!,
+          path: pathInfo.path ? `${pathInfo.path}${pathInfo.paramPath}` : '',
+          menuLevel: String(item.menuLevel),
+          githubOwner: item.githubOwner,
+          githubRepo: item.githubRepo,
+          githubBranch: item.githubBranch,
+          params: pathInfo.params,
           child: [],
-          upMenuId: item.upMenuId,
+          parentMenuId: String(item.parentMenuId),
           sortOrder: item.sortOrder
         }
       })
@@ -158,18 +159,18 @@ export const usePermissionStore = defineStore('permission', () => {
 
       /** 접근권한 있는 메뉴 셋팅 */
       const accessMenus: accessMenu[] = _.map(menuQuery.data.value!, (item) => {
-        const urlInfo = getUrlData(item.url)
+        const pathInfo = getPathData(item.path)
         return {
-          title: item.menuNm,
-          name: item.sysMenuId!,
-          href: urlInfo.url ? `${urlInfo.url}${urlInfo.paramUrl}` : '',
-          url: urlInfo.url,
-          menuLvl: item.menuLvl,
-          menuViewMethod: item.menuViewMethod,
-          manual: item.manualFlag === 'Y' ? true : false,
-          editable: item.userWriteFlag === 'Y' ? true : false,
-          params: urlInfo.params,
-          upMenuId: item.upMenuId,
+          title: item.menuName,
+          name: String(item.menuId)!,
+          path: pathInfo.path ? `${pathInfo.path}${pathInfo.paramPath}` : '',
+          menuLevel: item.menuLevel,
+          githubOwner: item.githubOwner,
+          githubRepo: item.githubRepo,
+          githubBranch: item.githubBranch,
+          editable: true,
+          params: pathInfo.params,
+          parentMenuId: String(item.parentMenuId),
           sortOrder: item.sortOrder
         }
       })
@@ -202,25 +203,25 @@ export const usePermissionStore = defineStore('permission', () => {
   function findOpenMenus(name: string, selfOpen?: boolean) {
     openMenus.value = [] // 초기화
     if (name && allMenus.value && allMenus.value.length > 0) {
-      const currentMenu: menuData = _.find(allMenus.value, { sysMenuId: name }) as menuData
-      if (currentMenu && currentMenu.upMenuId) {
-        findUpMenu(currentMenu.upMenuId)
+      const currentMenu: menuData = _.find(allMenus.value, { menuId: Number(name) }) as menuData
+      if (currentMenu && currentMenu.parentMenuId) {
+        findUpMenu(currentMenu.parentMenuId)
       }
 
       if (selfOpen) {
-        openMenus.value.push(currentMenu.sysMenuId!)
+        openMenus.value.push(String(currentMenu.menuId)!)
       }
     } else {
       openMenus.value = []
     }
   }
-  function findUpMenu(upMenuId: string) {
+  function findUpMenu(parentMenuId: string) {
     const upMenu: menuData = _.find(allMenus.value, {
-      sysMenuId: upMenuId
+      menuId: parentMenuId
     }) as menuData
     if (upMenu) {
-      openMenus.value.push(upMenu.sysMenuId!)
-      findUpMenu(upMenu.upMenuId)
+      openMenus.value.push(String(upMenu.menuId)!)
+      findUpMenu(upMenu.parentMenuId)
     } else {
       return
     }
@@ -233,7 +234,7 @@ export const usePermissionStore = defineStore('permission', () => {
     navi: string
   ) {
     let menuLevel1 = _.filter(_menus, {
-      menuLvl: menuLevel.toString()
+      menuLevel: String(menuLevel)
     })
     _.forEach(menuLevel1, (menu) => {
       menu.sortOrder = menu.sortOrder ? (!isNaN(menu.sortOrder) ? Number(menu.sortOrder) : 0) : 0
@@ -244,23 +245,23 @@ export const usePermissionStore = defineStore('permission', () => {
     let subLevel = []
     _.forEach(menuLevel1, (menu) => {
       subLevel = _.filter(_Allmenus, {
-        menuLvl: String(menuLevel + 1),
-        upMenuId: menu.name
+        menuLevel: String(menuLevel + 1),
+        parentMenuId: menu.name
       })
 
       const menuInfo: menuData = {
         title: menu.title,
         icon: menu.icon,
         name: menu.name,
-        menuLvl: menu.menuLvl,
-        href: menu.href,
-        url: menu.url,
-        header: menu.url === null || menu.url === '' ? '' : 'generic',
-        manual: menu.manual,
+        menuLevel: menu.menuLevel,
+        path: menu.path,
+        githubOwner: menu.githubOwner,
+        githubRepo: menu.githubRepo,
+        githubBranch: menu.githubBranch,
         params: menu.params,
         children: [],
         /** api info */
-        upMenuId: menu.upMenuId,
+        parentMenuId: menu.parentMenuId,
         sortOrder: menu.sortOrder
       }
 
@@ -282,13 +283,14 @@ export const usePermissionStore = defineStore('permission', () => {
             title: '',
             icon: '',
             name: item.name,
-            menuLvl: '0',
-            href: item.path,
-            url: '',
-            manual: false,
+            menuLevel: '0',
+            path: item.path,
+            githubOwner: '',
+            githubRepo: '',
+            githubBranch: '',
             params: {},
             children: [],
-            upMenuId: '',
+            parentMenuId: '',
             sortOrder: 0
           })
         }
@@ -300,7 +302,7 @@ export const usePermissionStore = defineStore('permission', () => {
   function getAccessRouters(_menus: Array<accessMenu>) {
     const accessRouters: accessRouterData[] = []
     const haveUrlMenus = _.filter(_menus, (item) => {
-      return Boolean(item.url)
+      return Boolean(item.path)
     })
 
     _.forEach(asyncRouterMap, (router) => {
@@ -310,7 +312,6 @@ export const usePermissionStore = defineStore('permission', () => {
         meta: {
           title: '',
           // layout: router.meta?.layout,
-          manual: false,
           // 권한 처리 되고 난 후에 해당 로직 처리
           editable: Boolean(router.meta.editable), // menu.writeYn === 'Y' ? true : false,
           params: {},
@@ -324,22 +325,24 @@ export const usePermissionStore = defineStore('permission', () => {
       let subLevel: accessMenu[] = []
       _.forEach(haveUrlMenus, (menu) => {
         subLevel = _.filter(_menus, {
-          menuLvl: String(parseInt(menu.menuLvl) + 1),
-          upMenuId: menu.name
+          menuLevel: String(parseInt(menu.menuLevel) + 1),
+          parentMenuId: menu.name
         })
 
         accessRouters.push({
-          path: menu.href,
+          path: menu.path,
           name: `${menu.name}`,
           meta: {
             title: menu.title,
-            manual: menu.manual,
             // 권한 처리 되고 난 후에 해당 로직 처리
             editable: menu.editable, // menu.writeYn === 'Y' ? true : false,
             params: menu.params,
-            layout: 'default'
+            layout: 'default',
+            githubOwner: menu.githubOwner,
+            githubRepo: menu.githubRepo,
+            githubBranch: menu.githubBranch,
           },
-          component: getComponet(subLevel, menu.url)
+          component: getComponet(subLevel, menu.path)
         })
       })
     }
@@ -401,33 +404,32 @@ export const usePermissionStore = defineStore('permission', () => {
         }
       }
       componet = componentData
-      // componet = () => import(`../views${frontEndUrl}.vue`)
     }
     return componet
   }
 
-  function getUrlData(itemUrl: string) {
-    const urlInfo: urlData = {
-      url: itemUrl,
-      paramUrl: '',
+  function getPathData(path: string) {
+    const pathInfo: urlData = {
+      path: path,
+      paramPath: '',
       params: {}
     }
-    const paramIndex = _.indexOf(itemUrl, '?')
+    const paramIndex = _.indexOf(path, '?')
     if (paramIndex > -1) {
-      const paramString = itemUrl.substring(paramIndex + 1, itemUrl.length)
-      urlInfo.params = _.fromPairs(
+      const paramString = path.substring(paramIndex + 1, path.length)
+      pathInfo.params = _.fromPairs(
         _.map(paramString.split('&'), (text) => {
           return text.split('=')
         })
       )
 
-      urlInfo.url = urlInfo.url.substring(0, paramIndex)
+      pathInfo.path = pathInfo.path.substring(0, paramIndex)
 
-      for (const key in urlInfo.params) {
-        urlInfo.paramUrl += `/${urlInfo.params[key]}`
+      for (const key in pathInfo.params) {
+        pathInfo.paramPath += `/${pathInfo.params[key]}`
       }
     }
-    return urlInfo
+    return pathInfo
   }
 
   return {

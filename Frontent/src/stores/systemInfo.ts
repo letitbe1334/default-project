@@ -1,14 +1,16 @@
 import { useQuery } from '@tanstack/vue-query'
 import axios from 'axios'
 
-import { useAuth } from '@/composable/auth'
-const { getAccessToken } = useAuth()
+import { useAuthStore } from '@/stores/auth'
+const auth = useAuthStore()
+const { accessToken } = storeToRefs(auth)
 
 const fetchUsers = async (): Promise<Array<userType>> => {
   const response = await axios.get<Array<userType>>(selectConfig.auth.userInfo.users.url, {
     headers: {
       'Cache-Control': 'no-cache',
-      'X-Authorization': getAccessToken()
+      'Authorization': accessToken.value,
+      withCredentials: true,
     },
     baseURL: import.meta.env.VITE_API_URL
   })
@@ -18,7 +20,8 @@ const fetchDepts = async (): Promise<Array<deptType>> => {
   const response = await axios.get<Array<deptType>>(selectConfig.auth.userInfo.depts.url, {
     headers: {
       'Cache-Control': 'no-cache',
-      'X-Authorization': getAccessToken()
+      'Authorization': accessToken.value,
+      withCredentials: true,
     },
     baseURL: import.meta.env.VITE_API_URL
   })
@@ -28,31 +31,32 @@ const fetchVendors = async (): Promise<Array<vendorType>> => {
   const response = await axios.get<Array<vendorType>>(selectConfig.auth.userInfo.vendors.url, {
     headers: {
       'Cache-Control': 'no-cache',
-      'X-Authorization': getAccessToken()
+      'Authorization': accessToken.value,
+      withCredentials: true,
     },
     baseURL: import.meta.env.VITE_API_URL
   })
   return response.data
 }
-const fetchVendorUsers = async (): Promise<Array<vendorUserType>> => {
-  const response = await axios.get<Array<vendorUserType>>(
-    selectConfig.mdm.cim.vendor.user.list.url,
-    {
-      headers: {
-        'Cache-Control': 'no-cache',
-        'X-Authorization': getAccessToken()
-      },
-      baseURL: import.meta.env.VITE_API_URL
-    }
-  )
-  return response.data
-}
+// const fetchVendorUsers = async (): Promise<Array<vendorUserType>> => {
+//   const response = await axios.get<Array<vendorUserType>>(
+//     selectConfig.mdm.cim.vendor.user.list.url,
+//     {
+//       headers: {
+//         'Cache-Control': 'no-cache',
+//       'Authorization': accessToken.value
+//       },
+//       baseURL: import.meta.env.VITE_API_URL
+//     }
+//   )
+//   return response.data
+// }
 
 export const useSystemInfoStore = defineStore('systemInfo', () => {
   const depts = ref<Array<deptType>>([])
   const users = ref<Array<userType>>([])
   const vendors = ref<Array<vendorType>>([])
-  const vendorUsers = ref<Array<vendorUserType>>([])
+  // const vendorUsers = ref<Array<vendorUserType>>([])
 
   /** [USER] vue-query 정보 */
   const userQuery = useQuery({
@@ -61,7 +65,7 @@ export const useSystemInfoStore = defineStore('systemInfo', () => {
     staleTime: 3 * 60 * 60 * 1000, // 3시간 동안 fresh 상태 유지
     refetchOnWindowFocus: true, // 사용자가 다시 창을 보면 자동 새로고침
     refetchOnReconnect: true, // 인터넷 연결이 다시 되면 자동 새로고침
-    enabled: !!getAccessToken()
+    enabled: !!accessToken.value
   })
   const userVueQuery = ref({
     isStale: true,
@@ -89,7 +93,7 @@ export const useSystemInfoStore = defineStore('systemInfo', () => {
     staleTime: 3 * 60 * 60 * 1000, // 3시간 동안 fresh 상태 유지
     refetchOnWindowFocus: true, // 사용자가 다시 창을 보면 자동 새로고침
     refetchOnReconnect: true, // 인터넷 연결이 다시 되면 자동 새로고침
-    enabled: !!getAccessToken()
+    enabled: !!accessToken.value
   })
   const deptVueQuery = ref({
     isStale: true,
@@ -117,7 +121,7 @@ export const useSystemInfoStore = defineStore('systemInfo', () => {
     staleTime: 3 * 60 * 60 * 1000, // 3시간 동안 fresh 상태 유지
     refetchOnWindowFocus: true, // 사용자가 다시 창을 보면 자동 새로고침
     refetchOnReconnect: true, // 인터넷 연결이 다시 되면 자동 새로고침
-    enabled: !!getAccessToken()
+    enabled: !!accessToken.value
   })
   const vendorVueQuery = ref({
     isStale: true,
@@ -139,32 +143,32 @@ export const useSystemInfoStore = defineStore('systemInfo', () => {
   })
 
   /** [VENDOR USER] vue-query 정보 */
-  const vendorUserQuery = useQuery({
-    queryKey: ['vendorUsers'],
-    queryFn: fetchVendorUsers,
-    staleTime: 3 * 60 * 60 * 1000, // 3시간 동안 fresh 상태 유지
-    refetchOnWindowFocus: true, // 사용자가 다시 창을 보면 자동 새로고침
-    refetchOnReconnect: true, // 인터넷 연결이 다시 되면 자동 새로고침
-    enabled: !!getAccessToken()
-  })
-  const vendorUserVueQuery = ref({
-    isStale: true,
-    isFetching: true
-  })
-  const refetchVendorUser = () => vendorUserQuery.refetch()
-  vendorUserVueQuery.value.isFetching = vendorUserQuery.isFetching.value
-  vendorUserVueQuery.value.isStale = vendorUserQuery.isStale.value
-  watchEffect(() => {
-    if (vendorUserQuery.isSuccess.value) {
-      vendorUsers.value = vendorUserQuery.data.value!
-      vendorUserVueQuery.value.isStale = false // fresh한 상태로 변경
-    }
-  })
-  watchEffect(() => {
-    if (!vendorUserQuery.isFetching.value) {
-      vendorUserVueQuery.value.isFetching = false
-    }
-  })
+  // const vendorUserQuery = useQuery({
+  //   queryKey: ['vendorUsers'],
+  //   queryFn: fetchVendorUsers,
+  //   staleTime: 3 * 60 * 60 * 1000, // 3시간 동안 fresh 상태 유지
+  //   refetchOnWindowFocus: true, // 사용자가 다시 창을 보면 자동 새로고침
+  //   refetchOnReconnect: true, // 인터넷 연결이 다시 되면 자동 새로고침
+  //   enabled: !!accessToken.value
+  // })
+  // const vendorUserVueQuery = ref({
+  //   isStale: true,
+  //   isFetching: true
+  // })
+  // const refetchVendorUser = () => vendorUserQuery.refetch()
+  // vendorUserVueQuery.value.isFetching = vendorUserQuery.isFetching.value
+  // vendorUserVueQuery.value.isStale = vendorUserQuery.isStale.value
+  // watchEffect(() => {
+  //   if (vendorUserQuery.isSuccess.value) {
+  //     vendorUsers.value = vendorUserQuery.data.value!
+  //     vendorUserVueQuery.value.isStale = false // fresh한 상태로 변경
+  //   }
+  // })
+  // watchEffect(() => {
+  //   if (!vendorUserQuery.isFetching.value) {
+  //     vendorUserVueQuery.value.isFetching = false
+  //   }
+  // })
 
   return {
     /** state */
@@ -172,11 +176,11 @@ export const useSystemInfoStore = defineStore('systemInfo', () => {
     deptVueQuery,
     users,
     vendors,
-    vendorUsers,
+    // vendorUsers,
     /** actions */
     refetchUser,
     refetchDept,
     refetchVendor,
-    refetchVendorUser
+    // refetchVendorUser
   }
 })

@@ -3,18 +3,12 @@ import { get, merge } from 'lodash-es'
 
 import { useLogin } from '@/composable/login'
 import { useMessage } from '@/composable/message'
-import { useAuth } from '@/composable/auth'
-const {
-  getToken,
-  getAccessToken,
-  getNewToken,
-  getAccessExpiredCode,
-  getRefreshExpiredCode,
-  getWrongPasswordCode
-} = useAuth()
-import { getLang } from '@utils/common'
 
 import { useLoadingStore } from '@stores/loading'
+import { useAuthStore } from '@/stores/auth'
+
+import { getLang } from '@utils/common'
+
 
 // 로딩바 보이지 않게 할 URL 목록
 const hideLoadingUrlList = [
@@ -77,57 +71,46 @@ function createService() {
       // api 반환값
       return response
     },
-    (error) => {
+    async (error) => {
+      const auth = useAuthStore()
       /** loading 호출 */
       const loading = useLoadingStore()
-      // HTTP status code
-      const status = get(error, 'response.status')
-      if (status === 401) {
-        // Api server 정의 code
-        const returnCode = get(error, 'response.data.returnCode')
-        if (returnCode === getAccessExpiredCode()) {
-          // Access Token 만료 : Refresh Token으로 재인증 요청
-          // 1. Refresh Token 확인 요청
-          return getNewToken()
-            .then(() => {
-              // 2. 새로 발급된 Access Token 으로 재요청
-              axios.defaults.headers.common['X-Authorization'] = getAccessToken()
 
-              // 이전요청을 다시 수행하도록 url및 parameter등을 다시 호출.
-              return $http(error.config)
-            })
-            .catch(() => {
-              /** 만료토큰으로 처리되었음. 재로그인 필요. */
-              clear()
-            })
-        } else if (returnCode === getRefreshExpiredCode()) {
-          /** Refresh Token 만료 */
-          clear()
-        } else if (returnCode === getWrongPasswordCode()) {
-          // 비밀번호가 맞지 않을 때만 진입
+      const standardizedError  = {
+        httpStatus: get(error, 'response.status') || -100, // -100인 경우는 axios에서 반환하는 상태
+        message: get(error, 'response.data.message') || get(error, 'message'),
+        code: get(error, 'response.data.code') || get(error, 'code'),
+        timestamp: get(error, 'response.data.timestamp') || '',
+        path: get(error, 'response.data.path') || get(error, 'config.url'),
+      }
+
+      // HTTP status code
+      if (standardizedError.httpStatus === 401) {
+        // Api server 정의 code
+        if (standardizedError.code === auth.getAccessExpiredCode()) {
+          // Access Token 만료 : Refresh Token을 통해 JWT 토큰 재발급
+          // 1. JWT Token 재발급 요청
+          const isSuccess = await auth.getNewToken()
+          // 2. 새로 발급된 Access Token 으로 재요청
+          // axios.defaults.headers.common['X-Authorization'] = getAccessToken()
+
+          // 이전요청을 다시 수행하도록 url및 parameter등을 다시 호출.
+          if (isSuccess) return $http(error.config)
+          /** 만료토큰으로 처리되었음. 재로그인 필요. */
+          else clear()
         } else {
-          // INVALID
+          // INVALID_TOKEN
+          // 토큰이 올바르지 않거나, refresh token도 만료된 경우
+          clear()
         }
       } else {
-        const errorResponse = get(error, 'response')
-        const errorMessage = get(error, 'response.data.message')
-        const errorDetail = {
-          status: errorResponse?.status,
-          cause: errorResponse?.data?.cause,
-          causeDetail: errorResponse?.data?.causeDetail,
-          url: errorResponse?.data?.url,
-          config: {
-            method: errorResponse?.data?.config?.method,
-            url: errorResponse?.data?.config?.url
-          }
-        }
         // 개발자 에러 메시지
         const { exceptionNotify, alert } = useMessage()
         if (import.meta.env.MODE !== 'production') {
           exceptionNotify({
             title: '[개발자 안내]',
-            message: errorMessage,
-            errorDetail: errorDetail,
+            message: standardizedError.message,
+            errorDetail: standardizedError,
             type: 'error',
             duration: 0 // 자동으로 닫히지 않음
           })
@@ -141,7 +124,7 @@ function createService() {
         }
       }
       loading.loadingAllHide()
-      return Promise.reject(error)
+      return Promise.reject(standardizedError)
     }
   )
   return service
@@ -150,11 +133,14 @@ function createService() {
 /** 요청 방법 생성 */
 function createRequest(service: AxiosInstance) {
   return function <T>(config: AxiosRequestConfig): Promise<T> {
+    const auth = useAuthStore()
+    const { accessToken } = storeToRefs(auth)
     const defaultConfig = {
       headers: {
         'Cache-Control': 'no-cache',
-        'X-Authorization': config.headers?.refreshToken || getAccessToken()
+        'Authorization': accessToken.value
       },
+      withCredentials: true,
       timeout: config.timeout ? config.timeout : 10000,
       baseURL: import.meta.env.VITE_API_URL,
       data: {}

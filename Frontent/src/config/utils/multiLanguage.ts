@@ -11,6 +11,7 @@ const getTranLanguage: GetTranLanguageFunction = (message: string, format?: stri
 
 export default {
   install(app: App) {
+    console.log('language provide success')
     app.provide('$language', getTranLanguage)
     app.config.globalProperties.$language = getTranLanguage
   }

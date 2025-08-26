@@ -7,7 +7,6 @@
             v-for="(menu, idx) in menus"
             :key="`${menu.name}_${idx}`"
             :menu="menu"
-            :level="0"
           />
         </q-list>
       </q-scroll-area>
@@ -18,7 +17,7 @@
 import { ref, watchEffect } from 'vue'
 import { storeToRefs } from 'pinia'
 
-import { usePermissionStore } from '@stores/permission'
+import { menuData, usePermissionStore } from '@stores/permission'
 
 import menuItem from '@layouts/menuItem.vue'
 
@@ -30,7 +29,7 @@ defineOptions({
 const permission = usePermissionStore()
 const { routers } = storeToRefs(permission)
 
-const menus = ref(routers.value)
+const menus = ref<Array<menuData>>(routers.value)
 const props = defineProps({
   leftDrawer: {
     type: Object,

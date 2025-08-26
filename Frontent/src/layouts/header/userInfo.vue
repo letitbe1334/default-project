@@ -5,18 +5,18 @@
       dense
       color="white"
       class="top-shortcut-round"
-      :label="userName"
+      :label="user.nickname"
       icon="account_circle"
     >
       <q-popup-proxy transition-show="jump-down" transition-hide="jump-up" class="top-menu-layer">
         <q-card class="header-userinfo-layer">
           <q-card-section class="menu-userinfo-user">
             <q-icon name="account_circle" color="white" />
-            {{ userName }}
+            {{ user.nickname }}
           </q-card-section>
           <q-card-section class="menu-userinfo-dept">
             <q-icon name="business" color="white" />
-            {{ userDeptName }}
+            {{ user.email }}
           </q-card-section>
           <q-card-actions align="around" class="menu-userinfo-btn">
             <q-btn
@@ -49,9 +49,6 @@ const login = useLogin()
 /** userStore 호출 */
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
-
-const userName = ref('')
-const userDeptName = ref('')
 const popupOptions = ref({
   target: {},
   title: '',
@@ -67,13 +64,11 @@ onMounted(() => {
 })
 
 function init() {
-  userName.value = user.value.userName
-  userDeptName.value = user.value.deptName
 }
 
 function logout() {
   login.LogOut().finally(() => {
-    location.reload() // In order to re-instantiate the vue-router object to avoid bugs
+    location.reload()
   })
 }
 </script>

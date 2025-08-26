@@ -187,9 +187,6 @@ const router = useRouter()
  * @Data_선언
  * TODO ref, reactive 사용, 불명확한 단어 사용 X (ex. data, date)
  *******************************/
-const apprCntUrl = ref('')
-const taskUrl = ref('')
-const pushUrl = ref('')
 const apprCnt1 = ref(0)
 const apprCnt2 = ref(0)
 const apprCnt3 = ref(0)
@@ -238,54 +235,32 @@ onMounted(() => {
 function init() {
   // role setting
   // url setting
-  apprCntUrl.value = selectConfig.sys.appr.list.mycnt.url
-  taskUrl.value = selectConfig.com.task.url
-  pushUrl.value = selectConfig.sys.push.history.list.url
   // code setting
   // list setting
   getTask()
   getPushMessage()
-  if (import.meta.env.MODE === 'production') {
-    setInterval(() => {
-      getApprCnt()
-    }, 60000)
-  } else {
-    getApprCnt()
-  }
 }
 
 function goPage(_page: any) {
   router.push({ path: _page })
 }
-function getApprCnt() {
-  $http({
-    url: apprCntUrl.value,
-    method: 'GET',
-    params: { approvalUserId: user.value.userId }
-  }).then((_result: any) => {
-    apprCnt1.value = _result.data.apprCnt1
-    apprCnt2.value = _result.data.apprCnt2
-    apprCnt3.value = _result.data.apprCnt3
-    apprCnt4.value = _result.data.apprCnt4
-  })
-}
 function getTask() {
-  $http({
-    url: taskUrl.value,
-    method: 'GET',
-    params: { userId: user.value.userId }
-  }).then((_result: any) => {
-    tasks.value = _result.data
-  })
+  // $http({
+  //   url: taskUrl.value,
+  //   method: 'GET',
+  //   params: { userId: user.value.userId }
+  // }).then((_result: any) => {
+  //   tasks.value = _result.data
+  // })
 }
 function getPushMessage() {
-  $http({
-    url: pushUrl.value,
-    method: 'GET',
-    params: { userId: user.value.userId }
-  }).then((_result: any) => {
-    pushMessages.value = _result.data
-  })
+  // $http({
+  //   url: pushUrl.value,
+  //   method: 'GET',
+  //   params: { userId: user.value.userId }
+  // }).then((_result: any) => {
+  //   pushMessages.value = _result.data
+  // })
 }
 function deletePush(_push: any) {
   confirm({

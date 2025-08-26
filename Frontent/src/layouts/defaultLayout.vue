@@ -10,7 +10,7 @@
       <!-- 왼쪽(메뉴) -->
       <left-layout :leftDrawer="leftDrawer" />
       <!-- 오른쪽(즐겨찾기) -->
-      <right-layout :rightDrawer="rightDrawer" />
+      <!-- <right-layout :rightDrawer="rightDrawer" /> -->
       <!-- 중앙(Contents) -->
       <q-page-container>
         <div class="page-contents">
@@ -29,7 +29,7 @@
 import { ref } from 'vue'
 import headerLayout from '@layouts/headerLayout.vue'
 import leftLayout from '@layouts/leftLayout.vue'
-import rightLayout from '@layouts/rightLayout.vue'
+// import rightLayout from '@layouts/rightLayout.vue'
 
 defineOptions({
   name: 'defaultLayout'

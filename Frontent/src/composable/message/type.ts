@@ -5,14 +5,9 @@ export type toastrOptionData = {
   type: SweetAlertIcon
   buttonLabel?: string
   errorDetail?: {
-    status: string
-    cause: string
-    causeDetail: string
-    url: string
-    config?: {
-      method: string
-      url: string
-    }
+    timestamp: string
+    httpStatus: string
+    path: string
   }
   duration?: number
   confirmCallback?: Function

@@ -31,11 +31,11 @@
                   ><q-icon class="text-dark" name="highlight_off" /> {{ $language('다른탭닫기') }}
                 </q-item-section>
               </q-item>
-              <q-item clickable v-close-popup v-on:click="addFavoriteTab(tag)">
+              <!-- <q-item clickable v-close-popup v-on:click="addFavoriteTab(tag)">
                 <q-item-section
                   ><q-icon class="text-dark" name="star" /> {{ setFavoriteLabel(tag) }}
                 </q-item-section>
-              </q-item>
+              </q-item> -->
               <q-item clickable v-close-popup v-on:click="openNewWindow(tag)">
                 <q-item-section
                   ><q-icon class="text-dark" name="launch" /> {{ $language('새창으로 열기') }}
@@ -102,11 +102,12 @@ const { user } = storeToRefs(userStore)
 /** app 호출 */
 const app = useAppStore()
 const { favorites } = storeToRefs(app)
-setTimeout(() => {
-  if (!favorites.value || favorites.value.length === 0) {
-    app.GetFavorites({ userId: user.value.userId })
-  }
-}, 500)
+// TODO
+// setTimeout(() => {
+//   if (!favorites.value || favorites.value.length === 0) {
+//     app.GetFavorites({ userId: user.value.userId })
+//   }
+// }, 500)
 
 const route = useRoute()
 const router = useRouter()
@@ -210,23 +211,24 @@ function setFavoriteLabel(tag: routeView) {
   }
 }
 
-function addFavoriteTab(tag: routeView) {
-  let method = 'PUT'
-  if (findIndex(favorites.value, { sysMenuId: String(tag.name) }) < 0) {
-    method = 'POST'
-  }
-  $http({
-    url: transactionConfig.sys.favorite.insert.url,
-    method: method,
-    data: {
-      userId: user.value.userId,
-      sysMenuId: tag.name,
-      sortOrder: favorites.value.length + 1
-    }
-  }).then(() => {
-    app.GetFavorites({ userId: user.value.userId })
-  })
-}
+// TODO
+// function addFavoriteTab(tag: routeView) {
+//   let method = 'PUT'
+//   if (findIndex(favorites.value, { sysMenuId: String(tag.name) }) < 0) {
+//     method = 'POST'
+//   }
+//   $http({
+//     url: transactionConfig.sys.favorite.insert.url,
+//     method: method,
+//     data: {
+//       userId: user.value.userId,
+//       sysMenuId: tag.name,
+//       sortOrder: favorites.value.length + 1
+//     }
+//   }).then(() => {
+//     app.GetFavorites({ userId: user.value.userId })
+//   })
+// }
 
 function openNewWindow(tag: routeView) {
   window.open(tag.fullPath)
