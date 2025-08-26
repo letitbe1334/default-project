@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.deoh.demo.auth.mapper.MemberMenuMapper">
+    <select id="getMemberMenus" resultType="com.deoh.demo.auth.dto.MemberMenuDto">
+        SELECT m.menu_id 
+              ,m.parent_menu_id 
+              ,m.menu_name 
+              ,m.`path` 
+              ,m.icon 
+              ,m.github_owner 
+              ,m.github_repo
+              ,m.github_branch 
+              ,m.menu_level 
+              ,m.sort_order 
+          FROM authority_menu am 
+         INNER join menu m ON am.menu_id = m.menu_id 
+         WHERE exists(SELECT 1
+                        FROM member_authority ma 
+                       WHERE ma.authority_id = am.authority_id
+                         AND ma.member_id = #{memberId})  
+    </select>
+</mapper>

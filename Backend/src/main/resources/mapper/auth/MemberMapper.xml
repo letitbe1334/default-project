@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.auth.mapper.MemberMapper">
+    <resultMap id="memberMap" type="com.deoh.demo.auth.entity.Member">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="email" column="email"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="memberMap">
+        SELECT * FROM members
+    </select>
+    
+    <select id="findById" resultMap="memberMap">
+        SELECT * FROM members WHERE id = #{id}
+    </select>
+    
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO members (username, email) VALUES (#{username}, #{email})
+    </insert>
+
+    <update id="update">
+        UPDATE members SET username = #{username}, email = #{email} WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM members WHERE id = #{id}
+    </delete>
+</mapper>

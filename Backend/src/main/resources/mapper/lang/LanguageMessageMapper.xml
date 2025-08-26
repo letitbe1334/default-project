@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.deoh.demo.lang.mapper.LanguageMessageMapper">
+    <select id="getLanguageMessagesJson" resultType="HashMap">
+        SELECT language_key as languageKey
+              ,CASE 
+                    WHEN 'kr' = #{lang} THEN language_kr
+                    WHEN 'en' = #{lang} THEN language_en
+                    WHEN 'ja' = #{lang} THEN language_ja
+                    WHEN 'zh_cn' = #{lang} THEN language_zh_cn
+                    WHEN 'zh_tw' = #{lang} THEN language_zh_tw
+                END conversionLanguage
+          FROM language_message
+         WHERE use_flag = 'Y'
+    </select>
+</mapper>
