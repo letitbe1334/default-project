@@ -21,4 +21,10 @@ public class BaseRequest {
 
  // 정렬을 위한 필드명 (예: "createdAt,desc")
  private String sort;
+ 
+ // 등록자
+ private Long regId;
+ 
+ // 수정자
+ private Long modId;
 }

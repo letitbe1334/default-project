@@ -18,6 +18,7 @@ import com.deoh.demo.auth.dto.MemberRequestDto;
 import com.deoh.demo.auth.entity.Member;
 import com.deoh.demo.auth.repository.MemberRepository;
 import com.deoh.demo.config.exception.CustomException;
+import com.deoh.demo.config.exception.CustomJwtException;
 import com.deoh.demo.config.exception.ErrorCode;
 import com.deoh.demo.config.jwt.JwtTokenProvider;
 import com.deoh.demo.config.jwt.RefreshToken;
@@ -116,7 +117,7 @@ public class AuthService {
         } catch (ExpiredJwtException e) {
             // Refresh Token이 만료된 경우
             log.error("Refresh token has expired: {}", refreshToken);
-            throw new RuntimeException("Refresh token is expired. Please log in again.");
+            throw new CustomJwtException(ErrorCode.REFRESH_TOKEN_EXPIRED);
 
         } catch (JwtException | IllegalArgumentException e) {
             // 그 외 Refresh Token이 유효하지 않은 경우 (변조, 형식 오류 등)

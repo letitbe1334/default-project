@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.deoh.demo.attach.mapper.AttachFileMapper">
+    <select id="getAttachFiles" parameterType="com.deoh.demo.attach.dto.AttachFileRequestDto" resultType="com.deoh.demo.attach.entity.AttachFile">
+        SELECT af.attach_file_id
+              ,af.task_class_cd
+              ,af.task_key
+              ,af.ori_file_nm
+              ,af.save_file_nm
+              ,af.file_ext
+              ,af.file_size
+              ,af.file_physical_path
+              ,af.file_down_path
+              ,af.content_type
+              ,af.description
+          FROM attach_file af
+         WHERE af.del_flag = 'N'
+          <if test='taskClassCd != null and !"".equals(taskClassCd)'>
+           AND af.task_class_cd = #{taskClassCd}
+          </if>
+          <if test='taskKey != null and !"".equals(taskKey)'>
+           AND af.task_key = #{taskKey}
+          </if>
+    </select>
+    
+    <select id="getAttachFile" parameterType="com.deoh.demo.attach.dto.AttachFileRequestDto" resultType="com.deoh.demo.attach.entity.AttachFile">
+        SELECT af.attach_file_id
+              ,af.task_class_cd
+              ,af.task_key
+              ,af.ori_file_nm
+              ,af.save_file_nm
+              ,af.file_ext
+              ,af.file_size
+              ,af.file_physical_path
+              ,af.file_down_path
+              ,af.content_type
+              ,af.description
+          FROM attach_file af
+         WHERE af.del_flag = 'N'
+          <if test='attachFileId != null and !"".equals(attachFileId)'>
+           AND af.attach_file_id = #{attachFileId}
+          </if>
+          <if test='taskKey != null and !"".equals(taskKey)'>
+           AND af.task_key = #{taskKey}
+          </if>
+          <if test='taskClassCd != null and !"".equals(taskClassCd)'>
+           AND af.task_class_cd = #{taskClassCd}
+          </if>
+    </select>
+
+    <update id="updateAttachFile" parameterType="com.deoh.demo.attach.entity.AttachFile">
+        UPDATE attach_file
+           SET task_key = #{taskKey}
+              ,description = #{description}
+              ,mod_id = #{modId}
+              ,updated_at = #{updatedAt}
+         WHERE attach_file_id = #{attachFileId}
+    </update>
+
+    <delete id="deleteAttachFile">
+        UPDATE attach_file
+           SET del_flag = 'Y'
+              ,del_dt = udf_NOW()
+         WHERE attach_file_id = #{attachFileId}
+    </delete>
+
+    <delete id="deleteAttachFiles">
+        UPDATE attach_file
+           SET del_flag = 'Y'
+              ,del_dt = udf_NOW()
+         WHERE task_class_cd = #{taskClassCd}
+           AND task_key = #{taskKey}
+    </delete>
+</mapper>

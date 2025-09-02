@@ -1,10 +1,7 @@
 /* @vite-ignore */
 import { useQuery } from '@tanstack/vue-query'
-import axios from 'axios'
 
 import { asyncRouterMap, addAuthRouter } from '@/router'
-
-import { useAuthStore } from '@/stores/auth'
 
 interface urlData {
   path: string
@@ -78,15 +75,9 @@ export interface accessRouterData {
 }
 
 const fetchMenus = async (memberId: number): Promise<Array<responseMenuData>> => {
-  const auth = useAuthStore()
-  const { accessToken } = storeToRefs(auth)
-  const response = await axios.get<userType>(selectConfig.auth.menu.list.url, {
-    headers: {
-      'Cache-Control': 'no-cache',
-      'Authorization': accessToken.value,
-      withCredentials: true,
-    },
-    baseURL: import.meta.env.VITE_API_URL,
+  const response = await $http<Array<responseMenuData>>({
+    url: selectConfig.auth.menu.list.url,
+    method: 'GET',
     params: {
       memberId: memberId
     }

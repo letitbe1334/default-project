@@ -4,17 +4,11 @@ import { useQuery } from '@tanstack/vue-query'
 import { useAuthStore } from '@/stores/auth'
 
 const fetchServerHost = async (): Promise<string> => {
-  const auth = useAuthStore()
-  const { accessToken } = storeToRefs(auth)
-  const response = await axios.get<string>(selectConfig.com.mobileHostname.url, {
-    headers: {
-      'Cache-Control': 'no-cache',
-      'Authorization': accessToken.value,
-      withCredentials: true,
-    },
-    baseURL: import.meta.env.VITE_API_URL
+  const response = await $http<string>({
+    url: selectConfig.com.mobileHostname.url,
+    method: 'GET'
   })
-  return response.data
+  return response.data.data
 }
 
 export const useServerHostStore = defineStore('serverHost', () => {

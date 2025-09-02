@@ -4,22 +4,11 @@ import axios from 'axios'
 import { useAuthStore } from '@/stores/auth'
 
 const fetchPlants = async (): Promise<codeMasterType[]> => {
-  const auth = useAuthStore()
-  const { accessToken } = storeToRefs(auth)
-  const defaultConfig = {
-    headers: {
-      'Cache-Control': 'no-cache',
-      'Authorization': accessToken.value,
-      withCredentials: true,
-    },
-    baseURL: import.meta.env.VITE_API_URL,
-    data: {}
-  }
-  const response = await axios.get<codeMasterType[]>(
-    $format(selectConfig.sys.code.mst.list.url, 'PLANT_CD'),
-    defaultConfig
-  )
-  return response.data
+  const response = await $http<Array<codeMasterType>>({
+    url: $format(selectConfig.sys.code.mst.list.url, 'PLANT_CD'),
+    method: 'GET'
+  })
+  return response.data.data
 }
 
 export const usePlantStore = defineStore('plants', () => {

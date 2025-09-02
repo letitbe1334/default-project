@@ -1,4 +1,4 @@
-import axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
+import axios, { AxiosResponse, type AxiosInstance, type AxiosRequestConfig } from 'axios'
 import { get, merge } from 'lodash-es'
 
 import { useLogin } from '@/composable/login'
@@ -132,7 +132,10 @@ function createService() {
 
 /** 요청 방법 생성 */
 function createRequest(service: AxiosInstance) {
-  return function <T>(config: AxiosRequestConfig): Promise<T> {
+  function request<T = any>(config: AxiosRequestConfig, rawResponse?: true): Promise<AxiosResponse<ApiResponseData<T>>>
+  function request<T = any>(config: AxiosRequestConfig, rawResponse?: false): Promise<AxiosResponse<T>>
+
+  function request<T>(config: AxiosRequestConfig, rawResponse: boolean = true) {
     const auth = useAuthStore()
     const { accessToken } = storeToRefs(auth)
     const defaultConfig = {
@@ -156,8 +159,12 @@ function createRequest(service: AxiosInstance) {
       /** loading stack up */
       loading.loadingShow()
     }
-    return service(mergeConfig)
+    // return service.request<ApiResponseData<T> | T>(mergeConfig)
+    return rawResponse
+      ? service.request<ApiResponseData<T>>(mergeConfig)
+      : service.request<T>(mergeConfig)
   }
+  return request
 }
 
 /** API 요청 서비스 */

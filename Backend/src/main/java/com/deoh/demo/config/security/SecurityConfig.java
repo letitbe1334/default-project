@@ -79,12 +79,14 @@ public class SecurityConfig {
 	        /** authorizeHttpRequests() : 요청에 대한 인가(접근 권한) 규칙을 설정합니다. */
 	        .authorizeHttpRequests(authorizeRequests ->
 	                authorizeRequests
+	                	.requestMatchers("/api/auth/login/deoh").permitAll()
 	                    .requestMatchers("/api/auth/login").permitAll()
 	                    .requestMatchers("/api/auth/logout").permitAll()
 	                    .requestMatchers("/api/auth/refresh").permitAll()
 	                    .requestMatchers("/api/auth/register").permitAll()
 	                    .requestMatchers("/api/auth/signup").permitAll()
 	                    .requestMatchers("/json/lang/**").permitAll()
+	                    .requestMatchers("/images/**").permitAll()
 	                    .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-resources/**").permitAll()
 	                    // 위의 규칙에 해당하지 않는 모든 나머지 요청은 반드시 인증을 거쳐야만 접근을 허용.
 	                    .anyRequest().authenticated()

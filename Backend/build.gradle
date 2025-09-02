@@ -1,73 +1,93 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.5.4'
-	id 'io.spring.dependency-management' version '1.1.7'
+  id 'java'
+  id 'org.springframework.boot' version '3.5.4'
+  id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'com.deoh'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(17)
-	}
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(17)
+  }
 }
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
 }
 
 repositories {
-	mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	
-    // Spring Security
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	
-    // Spring Boot Web
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	
-    // JWT (JJWT)
-    implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
-    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
+  annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+  
+  // Spring Security
+  implementation 'org.springframework.boot:spring-boot-starter-security'
+  
+  // Spring Boot Web
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  
+  // JWT (JJWT)
+  implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
+  runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.12.5'
+  runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
     
-    // DB
-	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	
-    // Redis
-    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-	
-    // Mybatis
-    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+  // DB
+  implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  
+  // Redis
+  implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+  
+  // Mybatis
+  implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
+  runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
     
-    // lombok
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	
-	// XSS 문자 이스케이프를 위한 라이브러리
-	implementation 'org.apache.commons:commons-text:1.9'
-	
-    implementation 'com.fasterxml.jackson.core:jackson-databind'
-    implementation 'com.fasterxml.jackson.core:jackson-core'
-    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+  // lombok
+  compileOnly 'org.projectlombok:lombok'
+  annotationProcessor 'org.projectlombok:lombok'
+  
+  // XSS 문자 이스케이프를 위한 라이브러리
+  implementation 'org.apache.commons:commons-text:1.9'
+  
+  implementation 'com.fasterxml.jackson.core:jackson-databind'
+  implementation 'com.fasterxml.jackson.core:jackson-core'
+  implementation 'com.fasterxml.jackson.core:jackson-annotations'
     
-    // json
-    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
-	
+  // json
+  implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+  
+  // Apache Commons Codec 라이브러리
+  implementation 'commons-codec:commons-codec:1.16.1'
+  // Apache Commons Lang3 라이브러리 추가
+  implementation 'org.apache.commons:commons-lang3:3.14.0'
+  // Apache Commons IO 라이브러리 추가
+  implementation 'commons-io:commons-io:2.16.1'
+  
+  // log
+  implementation 'ch.qos.logback:logback-classic'
+  implementation 'p6spy:p6spy:3.9.1'
+  
+  // 이미지 리사이즈/압축 편리하게
+  implementation 'net.coobird:thumbnailator:0.4.20'
+
+  // WebP 지원용 ImageIO 플러그인
+  implementation 'com.luciad:imageio-webp:1.4.0'
+  
     // Test
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'org.springframework.security:spring-security-test'
+  testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+  useJUnitPlatform()
+}
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-parameters"
 }

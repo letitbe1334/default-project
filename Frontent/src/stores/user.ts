@@ -1,19 +1,11 @@
 import { useQuery } from '@tanstack/vue-query'
-import axios from 'axios'
 
 import { useLogin } from '@/composable/login'
-import { useAuthStore } from '@/stores/auth'
 
 const fetchUser = async (): Promise<userType> => {
-  const auth = useAuthStore()
-  const { accessToken } = storeToRefs(auth)
-  const response = await axios.get<userType>(selectConfig.auth.member.url, {
-    headers: {
-      'Cache-Control': 'no-cache',
-      'Authorization': accessToken.value,
-      withCredentials: true,
-    },
-    baseURL: import.meta.env.VITE_API_URL,
+  const response = await $http<userType>({
+    url: selectConfig.auth.member.url,
+    method: 'GET'
   })
   return response.data.data
 }

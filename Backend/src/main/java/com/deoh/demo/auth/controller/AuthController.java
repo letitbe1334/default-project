@@ -1,5 +1,6 @@
 package com.deoh.demo.auth.controller;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -30,6 +31,10 @@ import lombok.RequiredArgsConstructor;
 public class AuthController {
 
     private final AuthService authService;
+    @Value("${deoh.email}")
+    private String adminEmail;
+    @Value("${deoh.password}")
+    private String adminPassword;
 
     @PostMapping("/signup")
     public ResponseEntity<CommonResponseDto<?>> signup(@RequestBody MemberRequestDto requestDto) {
@@ -42,6 +47,17 @@ public class AuthController {
         TokenInfo tokenInfo = authService.login(requestDto);
 
         return ResponseEntity.ok(setCookieToken(tokenInfo, response));
+    }
+    
+    @PostMapping("/login/deoh")
+    public ResponseEntity<TokenInfo> autoLogin(HttpServletResponse response) {
+        MemberRequestDto requestDto = MemberRequestDto.builder()
+                .email(adminEmail)
+                .password(adminPassword)
+                .build();
+    	TokenInfo tokenInfo = authService.login(requestDto);
+    	
+    	return ResponseEntity.ok(setCookieToken(tokenInfo, response));
     }
 
     @PostMapping("/refresh")

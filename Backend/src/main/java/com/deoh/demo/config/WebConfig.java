@@ -47,5 +47,11 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler("/image/**").addResourceLocations("classpath:/static/image/");
         
         registry.addResourceHandler("/json/lang/**").addResourceLocations(jsonUrl);
+        
+
+        registry.addResourceHandler("/images/**")
+        	.addResourceLocations("file:psm-file-folder/")
+        	.setCachePeriod(3600)  // 캐시 시간
+            .resourceChain(true);
     }
 }

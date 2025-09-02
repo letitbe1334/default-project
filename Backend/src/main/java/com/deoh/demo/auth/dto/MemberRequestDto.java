@@ -4,6 +4,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.deoh.demo.auth.entity.Member;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,6 +16,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@Builder
 public class MemberRequestDto {
 
     private String email;
@@ -27,5 +29,5 @@ public class MemberRequestDto {
                 .password(passwordEncoder.encode(password))
                 .build();
     }
-
+    
 }

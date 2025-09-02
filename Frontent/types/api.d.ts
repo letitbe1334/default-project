@@ -1,6 +1,6 @@
 /** api 응답형식 */
 interface ApiResponseData<T> {
-  code: number
+  success?: boolean
   data: T
-  message: string
+  message?: string
 }

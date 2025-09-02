@@ -6,37 +6,25 @@ const auth = useAuthStore()
 const { accessToken } = storeToRefs(auth)
 
 const fetchUsers = async (): Promise<Array<userType>> => {
-  const response = await axios.get<Array<userType>>(selectConfig.auth.userInfo.users.url, {
-    headers: {
-      'Cache-Control': 'no-cache',
-      'Authorization': accessToken.value,
-      withCredentials: true,
-    },
-    baseURL: import.meta.env.VITE_API_URL
+  const response = await $http<Array<userType>>({
+    url: selectConfig.auth.userInfo.users.url,
+    method: 'GET'
   })
-  return response.data
+  return response.data.data
 }
 const fetchDepts = async (): Promise<Array<deptType>> => {
-  const response = await axios.get<Array<deptType>>(selectConfig.auth.userInfo.depts.url, {
-    headers: {
-      'Cache-Control': 'no-cache',
-      'Authorization': accessToken.value,
-      withCredentials: true,
-    },
-    baseURL: import.meta.env.VITE_API_URL
+  const response = await $http<Array<deptType>>({
+    url: selectConfig.auth.userInfo.depts.url,
+    method: 'GET'
   })
-  return response.data
+  return response.data.data
 }
 const fetchVendors = async (): Promise<Array<vendorType>> => {
-  const response = await axios.get<Array<vendorType>>(selectConfig.auth.userInfo.vendors.url, {
-    headers: {
-      'Cache-Control': 'no-cache',
-      'Authorization': accessToken.value,
-      withCredentials: true,
-    },
-    baseURL: import.meta.env.VITE_API_URL
+  const response = await $http<Array<vendorType>>({
+    url: selectConfig.auth.userInfo.vendors.url,
+    method: 'GET'
   })
-  return response.data
+  return response.data.data
 }
 // const fetchVendorUsers = async (): Promise<Array<vendorUserType>> => {
 //   const response = await axios.get<Array<vendorUserType>>(
