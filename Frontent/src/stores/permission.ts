@@ -107,13 +107,14 @@ export const usePermissionStore = defineStore('permission', () => {
     isFetching: true,
     refetch: null as (() => void) | null
   })
+  const hasToken = computed(() => !!accessToken.value);
   const menuQuery = useQuery({
-    queryKey: ['authMenus'],
+    queryKey: ['authMenus', accessToken.value],
     queryFn: () => fetchMenus(user.value.memberId),
     staleTime: 3 * 60 * 60 * 1000, // 3시간 동안 fresh 상태 유지
     refetchOnWindowFocus: true, // 사용자가 다시 창을 보면 자동 새로고침
     refetchOnReconnect: true, // 인터넷 연결이 다시 되면 자동 새로고침
-    enabled: !!accessToken.value && !!user.value.memberId
+    enabled: hasToken.value
   })
 
   watchEffect(() => {
